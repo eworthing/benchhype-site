@@ -12,6 +12,11 @@ import { site } from '../content/site';
         <a href={site.ctaPrimary.href} class="btn btn-primary">{site.ctaPrimary.label}</a>
         <a href={site.ctaSecondary.href} class="btn btn-secondary">{site.ctaSecondary.label}</a>
       </div>
+      <div class="hero-badges">
+        {site.badges.map((badge) => (
+          <span class="badge">{badge}</span>
+        ))}
+      </div>
     </div>
     <div class="hero-visual">
       <!-- TODO: Replace with real device mockup or screenshot -->
@@ -51,16 +56,22 @@ import { site } from '../content/site';
   }
 
   .hero-audience {
-    font-size: 1rem;
+    font-size: 0.9375rem;
     color: var(--text-secondary);
-    opacity: 0.8;
   }
 
   .hero-ctas {
     display: flex;
     gap: 1rem;
-    margin-top: 0.75rem;
+    margin-top: 0.5rem;
     flex-wrap: wrap;
+  }
+
+  .hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
   }
 
   .hero-visual {
@@ -117,6 +128,10 @@ import { site } from '../content/site';
     }
 
     .hero-ctas {
+      justify-content: center;
+    }
+
+    .hero-badges {
       justify-content: center;
     }
 

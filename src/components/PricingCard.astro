@@ -4,7 +4,7 @@ import { site } from '../content/site';
 const { free, pro } = site.pricing;
 ---
 
-<section class="section" id="pricing" aria-labelledby="pricing-heading">
+<section class="section section-alt" id="pricing" aria-labelledby="pricing-heading">
   <div class="container">
     <h2 id="pricing-heading">Free vs Pro</h2>
     <div class="pricing-grid">
@@ -87,6 +87,11 @@ const { free, pro } = site.pricing;
     width: 6px;
     height: 6px;
     border-radius: 50%;
+    background: var(--bullet);
+  }
+
+  /* Pro card bullets get the accent to reinforce value */
+  .pricing-pro li::before {
     background: var(--accent);
   }
 

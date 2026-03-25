@@ -6,51 +6,56 @@ import { site } from '../content/site';
   <div class="container">
     <h2 id="screenshots-heading">See it in action</h2>
   </div>
-  <div class="gallery-scroll">
-    {site.screenshots.map((screenshot) => (
-      <figure class="gallery-card">
-        <div class="gallery-image-wrap">
-          <!-- TODO: Replace placeholder when real screenshots are available -->
-          <div class="gallery-placeholder">
-            <span>Screenshot coming soon</span>
+  <div class="gallery-track">
+    <div class="gallery-scroll">
+      {site.screenshots.map((screenshot) => (
+        <figure class="gallery-card">
+          <div class="gallery-image-wrap">
+            <!-- TODO: Replace placeholder when real screenshots are available -->
+            <div class="gallery-placeholder">
+              <span>Screenshot coming soon</span>
+            </div>
+            <!--
+            <img
+              src={screenshot.src}
+              alt={screenshot.alt}
+              loading="lazy"
+              decoding="async"
+              width="390"
+              height="844"
+            />
+            -->
           </div>
-          <!--
-          <img
-            src={screenshot.src}
-            alt={screenshot.alt}
-            loading="lazy"
-            decoding="async"
-            width="390"
-            height="844"
-          />
-          -->
-        </div>
-        <figcaption>{screenshot.caption}</figcaption>
-      </figure>
-    ))}
+          <figcaption>{screenshot.caption}</figcaption>
+        </figure>
+      ))}
+    </div>
   </div>
 </section>
 
 <style>
-  .gallery-scroll {
-    display: flex;
-    gap: var(--element-gap);
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding-inline: var(--content-padding);
-    padding-bottom: 1rem;
-    -webkit-overflow-scrolling: touch;
+  /* Gallery breaks out of the container for visual impact */
+  .gallery-track {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    overflow: hidden;
   }
 
-  /* Hide scrollbar but keep scrollable */
   .gallery-scroll {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-inline: max(var(--content-padding), calc((100vw - var(--content-max)) / 2));
+    padding-bottom: 1.5rem;
+    -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
     scrollbar-color: var(--surface-border) transparent;
   }
 
   .gallery-card {
     flex: 0 0 auto;
-    width: clamp(260px, 40vw, 340px);
+    width: clamp(280px, 35vw, 360px);
     scroll-snap-align: center;
   }
 

@@ -22,7 +22,9 @@
   --text-secondary: #8a8a8a;
   --accent: #e63946;
   --accent-hover: #ff4d5a;
-  --accent-subtle: rgba(230, 57, 70, 0.12);
+  --accent-subtle: rgba(230, 57, 70, 0.10);
+  --surface-alt: #0e0e0e;
+  --bullet: #555;
   --success: #2ec46a;
   --warning: #f5a623;
 
@@ -81,12 +83,12 @@ img {
 }
 
 a {
-  color: var(--accent);
+  color: var(--text-primary);
   text-decoration: none;
 }
 
 a:hover {
-  color: var(--accent-hover);
+  color: var(--accent);
 }
 
 /* --- Focus States --- */
@@ -221,4 +223,20 @@ p {
 
 .text-accent {
   color: var(--accent);
+}
+
+/* Alternating section background */
+.section-alt {
+  background: var(--surface-alt);
+}
+
+/* Inline links that need accent color (inside prose, support, privacy) */
+.link-accent {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.link-accent:hover {
+  color: var(--accent-hover);
 }
