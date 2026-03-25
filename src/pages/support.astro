@@ -1,0 +1,116 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../content/site';
+---
+
+<BaseLayout
+  title={`Support — ${site.name}`}
+  description={`Get help with ${site.name}. Supported platforms, audio formats, Spotify requirements, and contact information.`}
+>
+  <article class="section container prose">
+    <h1>Support</h1>
+
+    <h2>How to Get Help</h2>
+    <p>
+      <!-- TODO: Replace with real support email or support form URL -->
+      For support, contact us at <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>.
+      We aim to respond within a few business days.
+    </p>
+
+    <h2>Supported Platforms</h2>
+    <p>
+      {site.name} requires iPhone or iPad running iOS 26 or later.
+      The app is a universal binary optimized for both devices.
+    </p>
+
+    <h2>Supported Audio Formats</h2>
+    <ul>
+      <li>M4A (AAC)</li>
+      <li>MP3</li>
+      <li>WAV</li>
+      <li>AIFF</li>
+      <li>CAF</li>
+    </ul>
+    <p>
+      Import audio files from the Files app, or use drag and drop on iPad.
+    </p>
+
+    <h2>Spotify Requirements</h2>
+    <p>
+      Spotify features in {site.name} require a Spotify Premium account and an active internet
+      connection. Local audio playback works entirely offline and does not require Spotify.
+    </p>
+
+    <h2>Common Questions</h2>
+
+    <h3>The app won't play audio</h3>
+    <ul>
+      <li>Make sure your device is not in Silent Mode.</li>
+      <li>Check that the volume is turned up and not muted in the mixer.</li>
+      <li>Verify the audio file is in a supported format.</li>
+      <li>Try restarting the app.</li>
+    </ul>
+
+    <h3>Spotify isn't connecting</h3>
+    <ul>
+      <li>Ensure you have a Spotify Premium account.</li>
+      <li>Check your internet connection.</li>
+      <li>Make sure the Spotify app is installed and you are logged in.</li>
+      <li>Try disconnecting and reconnecting your Spotify account in {site.name}.</li>
+    </ul>
+
+    <h3>How do I back up my setup?</h3>
+    <p>
+      Use the backup feature in {site.name} to export your boards, sounds, and settings.
+      Backups can be stored locally or in iCloud.
+    </p>
+
+    <h2>Links</h2>
+    <ul>
+      <li><a href={`${import.meta.env.BASE_URL}`}>Home</a></li>
+      <li><a href={`${import.meta.env.BASE_URL}privacy`}>Privacy Policy</a></li>
+      <li><a href={`${import.meta.env.BASE_URL}faq`}>FAQ</a></li>
+    </ul>
+  </article>
+</BaseLayout>
+
+<style>
+  .prose {
+    max-width: 720px;
+  }
+
+  .prose h1 {
+    margin-bottom: 2rem;
+  }
+
+  .prose h2 {
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul {
+    list-style: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose li {
+    color: var(--text-secondary);
+    font-size: var(--body);
+    margin-bottom: 0.375rem;
+  }
+
+  .prose a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+</style>

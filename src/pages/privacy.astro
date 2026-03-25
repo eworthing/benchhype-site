@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../content/site';
+---
+
+<BaseLayout
+  title={`Privacy Policy — ${site.name}`}
+  description={`Privacy policy for ${site.name}, a live sports audio control app for iOS.`}
+>
+  <article class="section container prose">
+    <h1>Privacy Policy</h1>
+    <p class="last-updated">Last updated: March 2026</p>
+
+    <h2>Overview</h2>
+    <p>
+      {site.name} is a live sports audio control app for iPhone and iPad. We are committed
+      to protecting your privacy. This policy explains what information {site.name} collects,
+      how it is used, and your choices.
+    </p>
+
+    <h2>Information You Provide</h2>
+    <p>
+      {site.name} does not require you to create an account. The app does not collect your name,
+      email address, or other personal information unless you contact us directly for support.
+    </p>
+
+    <h2>Local Audio Files and Imported Content</h2>
+    <p>
+      Audio files you import into {site.name} remain on your device. {site.name} does not
+      upload, transmit, or share your local audio files with any server or third party.
+    </p>
+
+    <h2>Spotify Integration</h2>
+    <p>
+      If you choose to connect Spotify, {site.name} uses the Spotify SDK and API to enable
+      playback features. Your Spotify account information is handled by Spotify and is subject
+      to <a href="https://www.spotify.com/legal/privacy-policy/" rel="noopener noreferrer" target="_blank">Spotify's Privacy Policy</a>.
+      {site.name} does not store your Spotify credentials.
+    </p>
+
+    <!-- TODO: Finalize this section based on actual analytics/crash reporting implementation -->
+    <h2>Diagnostics and Crash Reporting</h2>
+    <p>
+      <!-- TODO: Update with specific details about crash reporting services used, if any -->
+      {site.name} may collect anonymous crash reports and basic diagnostics to help improve
+      app stability. This data does not include personally identifiable information.
+    </p>
+
+    <h2>Backup and Export Data</h2>
+    <p>
+      {site.name} offers backup and restore features that store data locally on your device
+      or in your personal iCloud account. Backup data is not transmitted to our servers.
+    </p>
+
+    <h2>Third-Party Services</h2>
+    <p>
+      {site.name} may integrate with the following third-party services:
+    </p>
+    <ul>
+      <li>Spotify (optional, for music playback)</li>
+      <li>Apple (App Store, iCloud backup)</li>
+      <!-- TODO: Add any additional third-party services -->
+    </ul>
+    <p>
+      Each third-party service has its own privacy policy governing how your data is handled.
+    </p>
+
+    <h2>Data Retention</h2>
+    <p>
+      Since {site.name} stores data locally on your device, data retention is under your control.
+      Deleting the app removes all locally stored data.
+    </p>
+
+    <h2>Your Choices</h2>
+    <ul>
+      <li>You can use {site.name} without connecting Spotify or any external service.</li>
+      <li>You can delete your local data at any time by removing the app.</li>
+      <li>You can manage iCloud backup through your device settings.</li>
+    </ul>
+
+    <h2>Contact</h2>
+    <p>
+      <!-- TODO: Replace with real support email -->
+      If you have questions about this privacy policy, contact us at
+      <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>.
+    </p>
+
+    <h2>Changes to This Policy</h2>
+    <p>
+      We may update this policy from time to time. Changes will be posted on this page with
+      an updated revision date.
+    </p>
+  </article>
+</BaseLayout>
+
+<style>
+  .prose {
+    max-width: 720px;
+  }
+
+  .prose h1 {
+    margin-bottom: 0.5rem;
+  }
+
+  .last-updated {
+    font-size: var(--small);
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+  }
+
+  .prose h2 {
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul {
+    list-style: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose li {
+    color: var(--text-secondary);
+    font-size: var(--body);
+    margin-bottom: 0.375rem;
+  }
+
+  .prose a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+</style>

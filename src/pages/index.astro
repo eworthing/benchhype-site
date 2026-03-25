@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import BadgeRow from '../components/BadgeRow.astro';
+import BenefitGrid from '../components/BenefitGrid.astro';
+import ScreenshotGallery from '../components/ScreenshotGallery.astro';
+import FeatureSections from '../components/FeatureSections.astro';
+import WorkflowSteps from '../components/WorkflowSteps.astro';
+import PricingCard from '../components/PricingCard.astro';
+import FAQList from '../components/FAQList.astro';
+---
+
+<BaseLayout>
+  <Hero />
+  <BadgeRow />
+  <BenefitGrid />
+  <ScreenshotGallery />
+  <FeatureSections />
+  <WorkflowSteps />
+  <PricingCard />
+  <FAQList limit={3} showCta={true} />
+</BaseLayout>

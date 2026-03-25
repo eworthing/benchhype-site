@@ -1,0 +1,110 @@
+---
+import { site } from '../content/site';
+
+const { free, pro } = site.pricing;
+---
+
+<section class="section" id="pricing" aria-labelledby="pricing-heading">
+  <div class="container">
+    <h2 id="pricing-heading">Free vs Pro</h2>
+    <div class="pricing-grid">
+      <div class="card pricing-card">
+        <h3>{free.title}</h3>
+        <p class="pricing-desc">{free.description}</p>
+        <ul>
+          {free.limits.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+        <div class="pricing-price">
+          <span class="price-value">Free</span>
+        </div>
+      </div>
+
+      <div class="card pricing-card pricing-pro">
+        <h3>{pro.title}</h3>
+        <p class="pricing-desc">{pro.description}</p>
+        <ul>
+          {pro.features.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+        <div class="pricing-price">
+          <span class="price-value">{pro.price}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  h2 {
+    margin-bottom: 3rem;
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--element-gap);
+    max-width: 720px;
+  }
+
+  .pricing-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .pricing-pro {
+    border-color: var(--accent);
+  }
+
+  .pricing-desc {
+    font-size: var(--small);
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+  }
+
+  li {
+    font-size: var(--small);
+    color: var(--text-secondary);
+    padding-left: 1.25rem;
+    position: relative;
+  }
+
+  li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .pricing-price {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--surface-border);
+  }
+
+  .price-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  @media (max-width: 640px) {
+    .pricing-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

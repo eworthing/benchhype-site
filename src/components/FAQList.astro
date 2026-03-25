@@ -1,0 +1,117 @@
+---
+import { site } from '../content/site';
+
+interface Props {
+  /** Number of items to show (0 = all) */
+  limit?: number;
+  /** Show final CTA block below FAQ */
+  showCta?: boolean;
+}
+
+const { limit = 0, showCta = false } = Astro.props;
+const items = limit > 0 ? site.faq.slice(0, limit) : site.faq;
+---
+
+<section class="section" id="faq" aria-labelledby="faq-heading">
+  <div class="container">
+    <h2 id="faq-heading">Frequently asked questions</h2>
+    <div class="faq-list">
+      {items.map((item) => (
+        <details class="faq-item">
+          <summary>{item.q}</summary>
+          <p>{item.a}</p>
+        </details>
+      ))}
+    </div>
+
+    {showCta && (
+      <div class="faq-cta">
+        <h2>Ready for game day?</h2>
+        <p>Get BenchHype and take control of your game-day sound.</p>
+        <div class="faq-cta-buttons">
+          <a href={site.ctaPrimary.href} class="btn btn-primary">{site.ctaPrimary.label}</a>
+          <a href={`${import.meta.env.BASE_URL}support`} class="btn btn-secondary">Get Support</a>
+        </div>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  h2 {
+    margin-bottom: 3rem;
+  }
+
+  .faq-list {
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--surface-border);
+    padding: 1.25rem 0;
+  }
+
+  .faq-item:first-child {
+    border-top: 1px solid var(--surface-border);
+  }
+
+  summary {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.0625rem;
+    color: var(--text-primary);
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary::after {
+    content: '+';
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+
+  details[open] summary::after {
+    content: '−';
+  }
+
+  details p {
+    margin-top: 0.75rem;
+    font-size: var(--body);
+    line-height: 1.7;
+    padding-right: 2rem;
+  }
+
+  /* CTA block */
+  .faq-cta {
+    margin-top: var(--section-gap);
+    text-align: center;
+  }
+
+  .faq-cta h2 {
+    margin-bottom: 1rem;
+  }
+
+  .faq-cta p {
+    margin-bottom: 2rem;
+    font-size: 1.125rem;
+  }
+
+  .faq-cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+</style>

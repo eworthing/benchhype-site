@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FAQList from '../components/FAQList.astro';
+import { site } from '../content/site';
+---
+
+<BaseLayout
+  title={`FAQ — ${site.name}`}
+  description={`Frequently asked questions about ${site.name}. Offline support, Spotify requirements, device compatibility, and more.`}
+>
+  <FAQList showCta={true} />
+</BaseLayout>
