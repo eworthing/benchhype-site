@@ -7,14 +7,14 @@ import { site } from '../content/site';
     <h2 id="screenshots-heading">See it in action</h2>
   </div>
   <div class="gallery-track">
+    <div class="gallery-fade-left"></div>
+    <div class="gallery-fade-right"></div>
     <div class="gallery-scroll">
       {site.screenshots.map((screenshot) => (
         <figure class="gallery-card">
           <div class="gallery-image-wrap">
             <!-- TODO: Replace placeholder when real screenshots are available -->
-            <div class="gallery-placeholder">
-              <span>Screenshot coming soon</span>
-            </div>
+            <div class="gallery-placeholder"></div>
             <!--
             <img
               src={screenshot.src}
@@ -34,11 +34,31 @@ import { site } from '../content/site';
 </section>
 
 <style>
-  /* Gallery breaks out of the container for visual impact */
   .gallery-track {
     width: 100vw;
     margin-left: calc(-50vw + 50%);
     overflow: hidden;
+    position: relative;
+  }
+
+  .gallery-fade-left,
+  .gallery-fade-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 60px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .gallery-fade-left {
+    left: 0;
+    background: linear-gradient(to right, var(--bg), transparent);
+  }
+
+  .gallery-fade-right {
+    right: 0;
+    background: linear-gradient(to left, var(--bg), transparent);
   }
 
   .gallery-scroll {
@@ -70,11 +90,7 @@ import { site } from '../content/site';
   .gallery-placeholder {
     width: 100%;
     height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-secondary);
-    font-size: var(--small);
+    background: var(--surface);
   }
 
   .gallery-image-wrap img {

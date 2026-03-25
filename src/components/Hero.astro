@@ -19,11 +19,57 @@ import { site } from '../content/site';
       </div>
     </div>
     <div class="hero-visual">
-      <!-- TODO: Replace with real device mockup or screenshot -->
-      <div class="hero-placeholder">
-        <div class="placeholder-device">
-          <div class="placeholder-screen">
-            <span>Screenshot coming soon</span>
+      <div class="device-frame">
+        <div class="device-screen">
+          <div class="device-statusbar">
+            <span class="device-time">9:41</span>
+          </div>
+          <div class="soundboard-grid">
+            <div class="sb-tile sb-active">
+              <span class="sb-label">Airhorn</span>
+            </div>
+            <div class="sb-tile">
+              <span class="sb-label">Anthem</span>
+            </div>
+            <div class="sb-tile">
+              <span class="sb-label">Crowd</span>
+            </div>
+            <div class="sb-tile">
+              <span class="sb-label">Whistle</span>
+            </div>
+            <div class="sb-tile sb-playing">
+              <span class="sb-label">Buzzer</span>
+            </div>
+            <div class="sb-tile">
+              <span class="sb-label">Organ</span>
+            </div>
+            <div class="sb-tile">
+              <span class="sb-label">Defense</span>
+            </div>
+            <div class="sb-tile">
+              <span class="sb-label">Strike</span>
+            </div>
+            <div class="sb-tile">
+              <span class="sb-label">Charge</span>
+            </div>
+            <div class="sb-tile">
+              <span class="sb-label">Timeout</span>
+            </div>
+            <div class="sb-tile">
+              <span class="sb-label">Slap</span>
+            </div>
+            <div class="sb-tile">
+              <span class="sb-label">Win</span>
+            </div>
+          </div>
+          <div class="device-player">
+            <div class="player-icon">&#9654;</div>
+            <div class="player-info">
+              <span class="player-title">Game Opener Mix</span>
+              <div class="player-progress">
+                <div class="player-progress-fill"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -74,39 +120,136 @@ import { site } from '../content/site';
     margin-top: 0.25rem;
   }
 
+  /* Device mockup — flat, no effects */
   .hero-visual {
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  .hero-placeholder {
-    width: 100%;
-    max-width: 320px;
-  }
-
-  .placeholder-device {
-    aspect-ratio: 9 / 16;
+  .device-frame {
+    width: 280px;
+    height: 580px;
     background: var(--surface);
-    border: 1px solid var(--surface-border);
-    border-radius: 24px;
-    padding: 12px;
-    width: 100%;
+    border-radius: 2.5rem;
+    border: 4px solid var(--surface-border);
+    overflow: hidden;
   }
 
-  .placeholder-screen {
+  .device-screen {
     width: 100%;
     height: 100%;
     background: var(--bg);
-    border-radius: 16px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .device-statusbar {
+    display: flex;
+    justify-content: center;
+    padding: 4px 8px;
+  }
+
+  .device-time {
+    color: var(--text-secondary);
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .soundboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    flex: 1;
+  }
+
+  .sb-tile {
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  .placeholder-screen span {
+  .sb-active {
+    background: rgba(230, 57, 70, 0.15);
+    border-color: rgba(230, 57, 70, 0.3);
+  }
+
+  .sb-playing {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .sb-label {
+    font-size: 7px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     color: var(--text-secondary);
-    font-size: var(--small);
+  }
+
+  .sb-active .sb-label {
+    color: var(--accent);
+  }
+
+  .sb-playing .sb-label {
+    color: #fff;
+  }
+
+  .device-player {
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    padding: 8px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: auto;
+  }
+
+  .player-icon {
+    width: 28px;
+    height: 28px;
+    background: var(--accent);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 10px;
+  }
+
+  .player-info {
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .player-title {
+    font-size: 8px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+  }
+
+  .player-progress {
+    width: 100%;
+    height: 3px;
+    background: var(--surface-border);
+    border-radius: 2px;
+    margin-top: 4px;
+    overflow: hidden;
+  }
+
+  .player-progress-fill {
+    width: 33%;
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
   }
 
   @media (max-width: 768px) {
@@ -117,10 +260,6 @@ import { site } from '../content/site';
 
     .hero-visual {
       order: -1;
-    }
-
-    .hero-placeholder {
-      max-width: 240px;
     }
 
     .hero {
@@ -137,6 +276,11 @@ import { site } from '../content/site';
 
     .hero-text {
       text-align: center;
+    }
+
+    .device-frame {
+      width: 220px;
+      height: 460px;
     }
   }
 </style>

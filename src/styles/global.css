@@ -163,13 +163,13 @@ p {
 }
 
 .btn-primary {
-  background: var(--accent);
-  color: #fff;
+  background: #fff;
+  color: #000;
 }
 
 .btn-primary:hover {
-  background: var(--accent-hover);
-  color: #fff;
+  background: rgba(255, 255, 255, 0.9);
+  color: #000;
 }
 
 .btn-secondary {
@@ -189,6 +189,11 @@ p {
   border: 1px solid var(--surface-border);
   border-radius: var(--radius);
   padding: 2rem;
+  transition: border-color 0.2s;
+}
+
+.card:hover {
+  border-color: var(--surface-hover);
 }
 
 .card-accent {
