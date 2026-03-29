@@ -18,9 +18,12 @@ import { site } from '../content/site';
             </ul>
           </div>
           <div class="feature-detail">
-            <div class="feature-placeholder">
-              <!-- Real screenshot will replace this -->
-            </div>
+            <img
+              src={feature.image}
+              alt={feature.summary}
+              loading="lazy"
+              decoding="async"
+            />
           </div>
         </div>
       ))}
@@ -97,11 +100,10 @@ import { site } from '../content/site';
     justify-content: center;
   }
 
-  .feature-placeholder {
+  .feature-detail img {
     width: 100%;
     aspect-ratio: 4 / 3;
-    background: var(--surface);
-    border: 1px solid var(--surface-border);
+    object-fit: cover;
     border-radius: var(--radius);
   }
 

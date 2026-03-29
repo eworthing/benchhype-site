@@ -13,9 +13,6 @@ import { site } from '../content/site';
       {site.screenshots.map((screenshot) => (
         <figure class="gallery-card">
           <div class="gallery-image-wrap">
-            <!-- TODO: Replace placeholder when real screenshots are available -->
-            <div class="gallery-placeholder"></div>
-            <!--
             <img
               src={screenshot.src}
               alt={screenshot.alt}
@@ -24,7 +21,6 @@ import { site } from '../content/site';
               width="390"
               height="844"
             />
-            -->
           </div>
           <figcaption>{screenshot.caption}</figcaption>
         </figure>
@@ -85,12 +81,6 @@ import { site } from '../content/site';
     border-radius: var(--radius);
     overflow: hidden;
     aspect-ratio: 9 / 16;
-  }
-
-  .gallery-placeholder {
-    width: 100%;
-    height: 100%;
-    background: var(--surface);
   }
 
   .gallery-image-wrap img {

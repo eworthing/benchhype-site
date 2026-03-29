@@ -51,6 +51,7 @@ export const site = {
     {
       title: "Sound Library",
       summary: "Import local audio or add Spotify tracks and playlists.",
+      image: "/features/feature-library.webp",
       bullets: [
         "Supports M4A, MP3, WAV, AIFF, CAF, and M4R",
         "Color tags, groups, search, and duplicate detection",
@@ -60,6 +61,7 @@ export const site = {
     {
       title: "Cue Editor",
       summary: "Fine-tune how each sound plays with precision controls.",
+      image: "/features/feature-cue-editor.webp",
       bullets: [
         "Waveform trimming with exact start and end points",
         "Fade in/out with adjustable durations",
@@ -69,6 +71,7 @@ export const site = {
     {
       title: "Boards & Live Mode",
       summary: "Build tap-ready layouts for fast game-day playback.",
+      image: "/features/feature-boards.webp",
       bullets: [
         "Flexible button grids with adjustable density (2–5 columns) and wide bar layout",
         "Live status indicators and focused performance screen",
@@ -79,6 +82,7 @@ export const site = {
     {
       title: "Emergency Controls",
       summary: "Always-visible controls to stay in command during the show.",
+      image: "/features/feature-emergency.webp",
       bullets: [
         "Panic mute — instant silence with one tap",
         "Now playing strip with elapsed time and gain control",
@@ -88,6 +92,7 @@ export const site = {
     {
       title: "Scripts & Rosters",
       summary: "Run repeatable show sequences and player intros.",
+      image: "/features/feature-scripts.webp",
       bullets: [
         "Step-by-step scripts with timed waits, operator holds, fade-outs, and stop-all",
         "Rehearsal mode, lock mode, and built-in templates",
@@ -97,6 +102,7 @@ export const site = {
     {
       title: "Spotify Integration",
       summary: "Add walk-up and background music alongside local sound cues.",
+      image: "/features/feature-spotify.webp",
       bullets: [
         "Search and import tracks or playlists",
         "Remote playback control",
@@ -106,6 +112,7 @@ export const site = {
     {
       title: "Backup, Logs & Accessibility",
       summary: "Keep setups portable and usable under real conditions.",
+      image: "/features/feature-backup.webp",
       bullets: [
         "Backup and restore your entire setup with automatic backups",
         "Session logs with timestamped play history and diagnostics",
@@ -126,9 +133,9 @@ export const site = {
       caption: "Build boards that match your sport and game-day workflow",
     },
     {
-      src: "/screenshots/mixer.webp",
-      alt: "BenchHype mixer showing multiple active sounds and volume controls",
-      caption: "Manage multiple active sounds from one clear mixer view",
+      src: "/screenshots/cue-editor.webp",
+      alt: "BenchHype cue editor with waveform trimming and playback controls",
+      caption: "Fine-tune each sound with trim points, fades, and gain",
     },
     {
       src: "/screenshots/library.webp",
@@ -142,8 +149,8 @@ export const site = {
     },
     {
       src: "/screenshots/rosters.webp",
-      alt: "BenchHype roster walkouts with player names and music assignments",
-      caption: "Step through player intros with walkout music and notes",
+      alt: "BenchHype roster live mode with player walkout list and tap-to-play controls",
+      caption: "Step through player intros with tap-to-play walkout music",
     },
   ],
 
