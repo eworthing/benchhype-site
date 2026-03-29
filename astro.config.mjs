@@ -4,6 +4,6 @@ import { defineConfig } from 'astro/config';
 // https://astro.build/config
 export default defineConfig({
   output: 'static',
-  site: 'https://benchhype.com',
-  base: '/',
+  site: 'https://eworthing.github.io',
+  base: '/benchhype-site/',
 });
