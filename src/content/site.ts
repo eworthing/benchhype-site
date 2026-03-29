@@ -23,11 +23,6 @@ export const site = {
   supportEmail: "TODO@example.com",
   supportUrl: "/support",
   privacyUrl: "/privacy",
-  // TODO: Replace with real App Store URL
-  appStoreUrl: "#",
-  // TODO: Replace with real TestFlight URL if applicable
-  betaUrl: "#",
-
   benefits: [
     {
       title: "Fast under pressure",

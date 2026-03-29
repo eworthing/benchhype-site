@@ -25,9 +25,6 @@
   --accent-subtle: rgba(230, 57, 70, 0.10);
   --surface-alt: #0e0e0e;
   --bullet: #555;
-  --success: #2ec46a;
-  --warning: #f5a623;
-
   /* Typography */
   --font: Inter, system-ui, -apple-system, sans-serif;
   --h1: clamp(2.5rem, 5vw, 4.5rem);
@@ -243,5 +240,50 @@ p {
 }
 
 .link-accent:hover {
+  color: var(--accent-hover);
+}
+
+/* --- Prose (long-form content pages) --- */
+.prose {
+  max-width: 720px;
+}
+
+.prose h1 {
+  margin-bottom: 0.5rem;
+}
+
+.prose h2 {
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.prose h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose p {
+  margin-bottom: 1rem;
+}
+
+.prose ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.prose li {
+  color: var(--text-secondary);
+  font-size: var(--body);
+  margin-bottom: 0.375rem;
+}
+
+.prose a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.prose a:hover {
   color: var(--accent-hover);
 }
