@@ -410,6 +410,168 @@
           }
         ]
       }
+    },
+    {
+      "schema_version": 3,
+      "loop": 2,
+      "loop_cap": 5,
+      "state": "CONTINUE",
+      "halt_subtype": null,
+      "halt_handoff": null,
+      "halt_handoff_text": null,
+      "dry_run": false,
+      "re_validated_at_sha": null,
+      "re_validation_context": null,
+      "provider": "claude_code",
+      "loop_model": "claude-sonnet-4-6",
+      "loop_model_source": "default",
+      "reviewer_model": "claude-sonnet-4-6",
+      "reviewer_model_source": "default",
+      "spawn_isolation": "subagent",
+      "findings_registry_path": "./findings_registry.json",
+      "discovery": null,
+      "verdict": "Good app, but not top-tier yet",
+      "verdict_explanation": "Loop 1 fixed the Schema.org honesty leak; loop 2 eliminates the parallel icons array that silently mismatched on content growth. The architecture is flat and increasingly honest. Remaining structural findings are BASE_URL scatter (7 files) and the Hero mockup (cosmetic).",
+      "scorecard": {
+        "architecture_quality": {
+          "score": 8.0, "delta": "UP",
+          "proof": "src/components/BenefitGrid.astro parallel icons array removed this loop; src/content/site.ts:26-39 each benefit now carries its own icon field — TypeScript enforces co-location. Residual: BASE_URL construction still scattered across 7 files (F-003/F2 in backlog).",
+          "residual_blocking_10": null, "residual_disposition": null, "residual_rationale_or_backlog_ref": null, "unverifiable_due_to_build_failure": false
+        },
+        "state_management": {
+          "score": 10, "delta": "SAME",
+          "proof": "src/content/site.ts — as const literal; zero mutable runtime state; static site generator pipeline; no writers, no readers, no persistence seam.",
+          "residual_blocking_10": null, "residual_disposition": null, "residual_rationale_or_backlog_ref": null, "unverifiable_due_to_build_failure": false
+        },
+        "concurrency": {
+          "score": 10, "delta": "SAME",
+          "proof": "No async/await, no Promise, no event handlers, no Task constructs in any source file. Astro SSG builds synchronous template trees at build time. Concurrency is genuinely N/A for a static site generator.",
+          "residual_blocking_10": null, "residual_disposition": null, "residual_rationale_or_backlog_ref": null, "unverifiable_due_to_build_failure": false
+        },
+        "test_strategy": {
+          "score": 3, "delta": "SAME",
+          "proof": "Zero test files in repo. astro check provides type correctness only. No behavioral, semantic, or integration tests. 9-anchor not met — framework-constrained acceptable residual for a static site with no runtime domain logic.",
+          "residual_blocking_10": null, "residual_disposition": null, "residual_rationale_or_backlog_ref": null, "unverifiable_due_to_build_failure": false
+        },
+        "credibility": {
+          "score": 8.0, "delta": "UP",
+          "proof": "Loop 1 commit 56056b6 fixed Schema.org honesty leak (F-001 resolved). Loop 2 eliminates parallel-array invariant violation (F-002 resolved). Both visible honesty hazards gone. Remaining residual: Hero.astro:28-63 hardcoded tile labels disconnected from site.ts — cosmetic severity.",
+          "residual_blocking_10": null, "residual_disposition": null, "residual_rationale_or_backlog_ref": null, "unverifiable_due_to_build_failure": false
+        },
+        "domain_modeling": {
+          "score": 7.5, "delta": "UP",
+          "proof": "src/content/site.ts:26-39 — each benefits[] entry now carries an icon field typed as string by as const. Missing icon = TypeScript type error at build time. Domain model for benefits is now complete. Residual: Hero.astro tile labels remain disconnected from site.ts (cosmetic).",
+          "residual_blocking_10": null, "residual_disposition": null, "residual_rationale_or_backlog_ref": null, "unverifiable_due_to_build_failure": false
+        },
+        "data_flow": {
+          "score": 8.5, "delta": "SAME",
+          "proof": "import { site } from '../content/site' is the single data source; all components import from it. DAG clean — no back-channels. Residual: import.meta.env.BASE_URL transformation repeated at 9 call sites across 7 files with two inconsistent patterns (F-003/F2 still open).",
+          "residual_blocking_10": null, "residual_disposition": null, "residual_rationale_or_backlog_ref": null, "unverifiable_due_to_build_failure": false
+        },
+        "framework_idioms": {
+          "score": 9.0, "delta": "UP",
+          "proof": "Loop 1 commit 56056b6 added is:inline directive (silenced astro(4000) hint) and corrected Schema.org to derive from site.iosRequirement. Loop 2: benefit icons now sourced from site.ts via benefit.icon — Fragment set:html={benefit.icon} idiom used correctly, no index-based access. Residual blocking 9.5: BASE_URL construction without a shared url() helper (F-003/F2) — non-idiomatic pattern duplicated across 7 files.",
+          "residual_blocking_10": null, "residual_disposition": null, "residual_rationale_or_backlog_ref": null, "unverifiable_due_to_build_failure": false
+        },
+        "simplicity": {
+          "score": 8.0, "delta": "UP",
+          "proof": "BenefitGrid.astro frontmatter reduced from 9 lines (7-line icons const + 2 import lines) to 2 lines (import only); site.ts gains 3 icon fields co-located with benefit data. Net: fewer lines, less ceremony, no index arithmetic. Residual: Hero.astro:28-286 still carries 220 lines of hardcoded mockup (cosmetic).",
+          "residual_blocking_10": null, "residual_disposition": null, "residual_rationale_or_backlog_ref": null, "unverifiable_due_to_build_failure": false
+        }
+      },
+      "authority_map": [],
+      "strengths": [
+        "site.ts as const now centralizes all domain copy including benefit icons — adding a benefit without an icon field is a TypeScript build error",
+        "FAQList.astro typed interface Props with limit/showCta parameters — callers in control, no ambient state",
+        "BaseLayout.astro Astro slot composition — deletion test passes; header/footer composed without duplication"
+      ],
+      "findings": [
+        {
+          "loop_local_id": "F1", "stable_id": "F-002", "id": "F1",
+          "title": "BenefitGrid parallel icons array silently mismatches on content growth",
+          "why_it_matters": "Adding a fourth benefit to site.ts produces a silently-broken card with no icon, undetectable until visual QA.",
+          "what_is_wrong": "BenefitGrid.astro:4-8 defined const icons = [svg1, svg2, svg3] (3 entries). At line 15, site.benefits.map((benefit, i) => ... icons[i]) indexed into this array. If a fourth benefit were added, icons[3] would be undefined — no TypeScript error, no build warning.",
+          "evidence": ["src/components/BenefitGrid.astro:4-8 (pre-fix)", "src/components/BenefitGrid.astro:15-18 (pre-fix)", "src/content/site.ts:26-39"],
+          "test_failed": "Shallow module", "dependency_category": "in-process",
+          "leverage_impact": "Callers (editors of site.ts) could not know that adding a benefit without also updating BenefitGrid.astro breaks the UI.",
+          "locality_impact": "A domain content change (site.ts) required a parallel implementation change (BenefitGrid.astro) with no mechanical enforcement.",
+          "metric_signal": "none",
+          "why_weakens_submission": "Silently broken UI on content growth; invariant violation unenforceable by type system.",
+          "severity": "Noticeable weakness", "adr_conflicts": [], "adr_reopen_justification": null,
+          "minimal_correction_path": "Move SVG icon strings into each benefit entry in site.ts as an icon field. Template reads benefit.icon directly. TypeScript enforces field presence — missing icon = type error at build time. This loop executed this fix.",
+          "blast_radius": {"change": ["src/content/site.ts", "src/components/BenefitGrid.astro"], "avoid": ["src/styles/global.css", "src/pages/"]}
+        },
+        {
+          "loop_local_id": "F2", "stable_id": "F-003", "id": "F2",
+          "title": "BASE_URL construction repeated at 9 call sites across 7 files with inconsistent patterns",
+          "why_it_matters": "Any URL convention change requires touching 7 files with two inconsistent patterns that can produce broken links on GitHub Pages.",
+          "what_is_wrong": "Two construction patterns: (1) ${BASE_URL}${link.href.replace(/^\\//, '')} in SiteHeader.astro:19,33; (2) bare ${BASE_URL}support concatenation in SiteFooter.astro:10-12, FAQList.astro:33, support.astro:71-73. Pattern 2 works only because literals happen not to have leading slashes.",
+          "evidence": ["src/components/SiteHeader.astro:13,19,33", "src/components/SiteFooter.astro:10-12", "src/components/FAQList.astro:33", "src/pages/support.astro:71-73", "src/pages/404.astro:10"],
+          "test_failed": "Shallow module", "dependency_category": "in-process",
+          "leverage_impact": "Each call site must independently know the BASE_URL transformation rule including the slash-stripping quirk.",
+          "locality_impact": "URL convention change requires touching 7 files; inconsistency means some sites are more fragile than others.",
+          "metric_signal": "none",
+          "why_weakens_submission": "Inconsistent URL construction can ship a broken link to production; fragile invariant spread across 7 files.",
+          "severity": "Noticeable weakness", "adr_conflicts": [], "adr_reopen_justification": null,
+          "minimal_correction_path": "Extract a url(path: string): string helper in src/utils/url.ts. All 9 call sites become url('support'), url('/'), etc. Deletion test: removing helper forces complexity back to 9 callers — it earns its keep.",
+          "blast_radius": {"change": ["src/utils/url.ts (new)", "src/components/SiteHeader.astro", "src/components/SiteFooter.astro", "src/components/FAQList.astro", "src/pages/support.astro", "src/pages/404.astro", "src/layouts/BaseLayout.astro"], "avoid": ["src/content/site.ts", "src/styles/global.css", "public/"]}
+        },
+        {
+          "loop_local_id": "F3", "stable_id": "F-004", "id": "F3",
+          "title": "Hero device mockup is 220 lines of hardcoded simulation disconnected from site.ts",
+          "why_it_matters": "Tile labels in the hero visual will drift from the real app's content with zero build-time warning.",
+          "what_is_wrong": "Hero.astro:28-63 contains 12 hardcoded .sb-tile labels and player title 'Game Opener Mix' (Hero.astro:67), all disconnected from site.ts. ~165 CSS lines for the mockup.",
+          "evidence": ["src/components/Hero.astro:28-63", "src/components/Hero.astro:67", "src/components/Hero.astro:80-286"],
+          "test_failed": "Deletion test", "dependency_category": "in-process",
+          "leverage_impact": "None: the mockup is pure HTML/CSS with no reuse.",
+          "locality_impact": "Changes to app tile naming require manual hunting in Hero.astro, not site.ts.",
+          "metric_signal": "none",
+          "why_weakens_submission": "Maintenance drift between hero visual and real app is invisible.",
+          "severity": "Cosmetic for contest", "adr_conflicts": [], "adr_reopen_justification": null,
+          "minimal_correction_path": "Replace the hardcoded device mockup with a real screenshot from site.screenshots[0] framed in the existing .device-frame CSS, or source tile labels from a site.ts heroTiles array. Option (a) is simpler.",
+          "blast_radius": {"change": ["src/components/Hero.astro"], "avoid": ["src/content/site.ts", "src/styles/global.css"]}
+        }
+      ],
+      "simplification_check": {
+        "structurally_necessary": "F1 fix (parallel icons → benefit.icon): passes deletion test — icons const disappears cleanly, complexity collapses into data. No new seam created.",
+        "new_seam_justified": false, "new_seam_adapters": [],
+        "helpful_simplification": "BenefitGrid.astro frontmatter reduced from 9 lines to 2 lines. Icon co-location with content eliminates the two-file edit requirement.",
+        "should_not_be_done": "Extracting an icon component, adding a mapping object, or introducing a registry — all add ceremony without reducing ambiguity.",
+        "tests_after_fix": "No tests exist; none needed. Build-time TypeScript (as const) enforces icon field presence. astro check: 0 errors, 0 hints."
+      },
+      "backlog": [
+        {
+          "priority": 1,
+          "title": "Extract url() helper to consolidate BASE_URL construction across 7 files",
+          "kind": "structural", "rank": "helpful",
+          "why_it_matters": "7-file touch radius for URL convention change; two inconsistent patterns that can produce broken links on GitHub Pages.",
+          "score_impact": "Data flow +0.5, Code simplicity +0.5"
+        }
+      ],
+      "unresolved_reason": null,
+      "deepening_candidates": [],
+      "builder_notes": [
+        {"pattern": "Parallel arrays as invisible invariants", "how_to_recognize": "Any map(..., i) => sideArray[i] pattern where two arrays are maintained separately.", "smallest_coding_rule": "Co-locate the associated data in the same object. Icon travels with the benefit in site.ts.", "stack_example": "In site.ts: benefits: [{ title: '...', body: '...', icon: '<svg>...</svg>' }]"},
+        {"pattern": "BASE_URL as ambient concern", "how_to_recognize": "Same env var read + string transform repeated in 7+ files.", "smallest_coding_rule": "One function url(path) that owns the convention. Deletion test: if you delete it, problem comes back in all callers.", "stack_example": "src/utils/url.ts: export const url = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\\//, '')}`"},
+        {"pattern": "Schema.org as honesty surface", "how_to_recognize": "JSON-LD in a layout containing prices, dates, or feature flags that also appear in a content module.", "smallest_coding_rule": "Derive JSON-LD values from the content module, or omit claims the code cannot authoritatively make.", "stack_example": "BaseLayout.astro: derive offer price from site.pricing.free and omit the pro offer until a numeric price exists."}
+      ],
+      "narrative": "Good, not winning yet. Loop 2 lands cleanly: parallel icons array gone, benefit domain objects now carry visual metadata, TypeScript enforces invariant at build time. Remaining structural work: BASE_URL scatter (7 files). Test strategy zero — honest for static site with no runtime domain logic. State management and concurrency 10 (N/A). Hero mockup cosmetic for contest.",
+      "loop_result": {
+        "what_changed": "Moved SVG icon strings from BenefitGrid.astro icons const into site.ts benefits[].icon fields; updated BenefitGrid.astro to use benefit.icon instead of icons[i]; removed the icons const entirely.",
+        "evidence_change_is_honest": "npm run build: 0 errors, 0 warnings, 0 hints, 5 pages built. astro check clean. TypeScript enforces icon field presence via as const — missing field is a compile-time error.",
+        "targeted_finding_status": "resolved",
+        "unintended_regression": null,
+        "changed_paths": ["src/components/BenefitGrid.astro", "src/content/site.ts"],
+        "interface_test_coverage_path": null
+      },
+      "implementation_review": {
+        "verdict": "approved",
+        "reason": "All three checks passed; parallel icons array is fully removed from BenefitGrid.astro; site.ts benefits[] now carry icon fields with TypeScript enforcement; no regression introduced.",
+        "checks": {"reality": "passed", "honesty": "passed", "regression": "passed"},
+        "regressions": [], "conditions": [], "rounds": 1,
+        "retry_count": 1, "retry_cause": null,
+        "retry_attempts": [{"attempt": 1, "outcome": "ok", "error": null, "duration_ms": null}]
+      }
     }
   ]
 }

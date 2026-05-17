@@ -111,3 +111,87 @@ Changed `src/layouts/BaseLayout.astro`: added `is:inline` to JSON-LD script tag;
 ## Loop 1 Implementation Review
 
 Verdict: **approved**. All three checks passed: F1 pattern no longer in source; offers array scoped to free tier only; astro(4000) hint eliminated; no regression introduced.
+
+--- Loop 2 (UTC 2026-05-16T21:30:00Z) ---
+
+see Loop 1 Discovery
+
+### Loop Counter
+Loop 2 of 5 (cap)
+
+### System Flag
+[STATE: CONTINUE]
+
+## Contest Verdict
+
+**Good app, but not top-tier yet**
+
+Loop 1 fixed the Schema.org honesty leak and silenced the Astro hint; loop 2 eliminates the parallel icons array that silently mismatched on content growth. Architecture flat and increasingly honest. Remaining: BASE_URL scatter (7 files), Hero mockup (cosmetic). Test strategy zero — genuinely N/A.
+
+## Scorecard (1–10)
+
+- **Architecture quality**: 8.0 | Delta: UP | Proof: `BenefitGrid.astro` parallel icons array removed; `site.ts:26-39` each benefit carries `icon` field — TypeScript enforces. Residual: BASE_URL scatter (F-003).
+- **State management and runtime ownership**: 10 | Delta: SAME | Proof: `site.ts` — `as const` literal; zero mutable runtime state. 10-anchor met.
+- **Concurrency and runtime safety**: 10 | Delta: SAME | Proof: no async/await, no Promise. Astro SSG synchronous. Concurrency genuinely N/A.
+- **Test strategy and regression resistance**: 3 | Delta: SAME | Proof: zero test files. `astro check` type correctness only. Framework-constrained acceptable residual for static site.
+- **Overall implementation credibility**: 8.0 | Delta: UP | Proof: commit `56056b6` fixed F-001 (Schema.org). Loop 2 resolves F-002 (parallel array). Both honesty hazards gone. Remaining: Hero.astro hardcoded tiles — cosmetic.
+- **Domain modeling**: 7.5 | Delta: UP | Proof: `site.ts:26-39` each `benefits[]` entry carries `icon` field typed by `as const`. Missing icon = TypeScript error. Residual: Hero.astro tiles disconnected from site.ts (cosmetic).
+- **Data flow and dependency design**: 8.5 | Delta: SAME | Proof: single `site.ts` data source, DAG clean. Residual: BASE_URL at 9 call sites, two inconsistent patterns (F-003 open).
+- **Framework / platform best practices**: 9.0 | Delta: UP | Proof: commit `56056b6` added `is:inline` + corrected Schema.org. Loop 2: `benefit.icon` via `Fragment set:html` — idiomatic. Residual blocking 9.5: BASE_URL without shared url() helper.
+- **Code simplicity and clarity**: 8.0 | Delta: UP | Proof: `BenefitGrid.astro` frontmatter 9→2 lines; `site.ts` gains 3 icon fields co-located with benefits. Residual: Hero.astro:28-286 220-line hardcoded mockup (cosmetic).
+
+## Authority Map
+
+No mutable runtime concerns. Static site.
+
+| Concern | Owner | Writers | Readers | Persistence | Async mutations | Verdict |
+|---|---|---|---|---|---|---|
+| Page content (incl. benefit icons) | `src/content/site.ts` (build-time `as const`) | None | All 8 components, 3 pages | None | None | Single and clear |
+| URL prefix | `import.meta.env.BASE_URL` | None | 9 call sites, 7 files | None | None | Single and clear |
+
+## Strengths That Matter
+
+- `site.ts as const` now centralizes all domain copy including benefit icons — adding a benefit without icon field is a TypeScript build error.
+- `FAQList.astro` typed `interface Props` — callers in control, no ambient state.
+- `BaseLayout.astro` Astro slot composition — deletion test passes.
+
+## Findings
+
+### Finding F1: BenefitGrid parallel icons array silently mismatches on content growth
+**Severity**: Noticeable weakness | **stable_id**: F-002
+**Evidence**: `src/components/BenefitGrid.astro:4-8` (pre-fix), `src/components/BenefitGrid.astro:15-18` (pre-fix), `src/content/site.ts:26-39`
+3-element icons const indexed against site.benefits. Adding a 4th benefit renders icon-less card with no error. This loop resolved.
+
+### Finding F2: BASE_URL construction repeated at 9 call sites across 7 files with inconsistent patterns
+**Severity**: Noticeable weakness | **stable_id**: F-003
+**Evidence**: `SiteHeader.astro:13,19,33`, `SiteFooter.astro:10-12`, `FAQList.astro:33`, `support.astro:71-73`, `404.astro:10`
+Two patterns: regex-strip in SiteHeader; bare concat in SiteFooter/pages. Inconsistency can produce double-slash on GitHub Pages.
+
+### Finding F3: Hero device mockup is 220 lines of hardcoded simulation disconnected from site.ts
+**Severity**: Cosmetic for contest | **stable_id**: F-004
+**Evidence**: `Hero.astro:28-63`, `Hero.astro:67`, `Hero.astro:80-286`
+12 hardcoded tile labels and "Game Opener Mix" — no derivation from site.ts.
+
+## Simplification Check
+
+| Field | Value |
+|---|---|
+| structurally_necessary | F1 fix (parallel icons → benefit.icon): passes deletion test; icons const disappears cleanly, complexity collapses into data. |
+| new_seam_justified | false |
+| helpful_simplification | BenefitGrid.astro frontmatter reduced from 9 lines to 2 lines. |
+| should_not_be_done | Extracting an icon component, adding mapping object, or introducing registry — adds ceremony. |
+| tests_after_fix | No tests; none needed. TypeScript as const enforces icon field. astro check: 0 errors, 0 hints. |
+
+Builder Notes: → REVIEW_HISTORY.json `loops[1].builder_notes` for full notes
+
+## Final Judge Narrative
+
+Good, not winning yet. Loop 2 lands cleanly: parallel icons array gone, benefit domain objects now carry visual metadata, TypeScript enforces invariant at build time. Remaining structural work: BASE_URL scatter (7 files, two inconsistent patterns) — one more loop should close it. Test strategy zero — honest for static site with no runtime domain logic. State management and concurrency 10 (N/A). Hero mockup cosmetic for contest. If BASE_URL helper lands in loop 3, architecture will be as tight as it can get.
+
+## Loop 2 Result
+
+Changed `src/content/site.ts` (added `icon` string field to each of 3 `benefits[]` entries — lightning bolt, wifi-off, and users SVGs) and `src/components/BenefitGrid.astro` (removed 7-line `icons` const from frontmatter; changed `<Fragment set:html={icons[i]} />` to `<Fragment set:html={benefit.icon} />`). `npm run build` passes: 0 errors, 0 warnings, 0 hints, 5 pages. Targeted finding F1 (stable_id F-002) resolved — parallel array gone; adding a 4th benefit without `icon` field is now a TypeScript compile error. No unintended scorecard regression.
+
+## Loop 2 Implementation Review
+
+Verdict: **approved**. All three checks passed: parallel icons array fully removed from BenefitGrid.astro; site.ts benefits[] carry icon fields with TypeScript enforcement; no regression introduced.
