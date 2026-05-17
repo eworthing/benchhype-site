@@ -30,7 +30,7 @@
       "last_seen_loop": 2,
       "occurrences": [
         {"loop": 1, "loop_local_id": "F2", "status": "open", "sha": "45006e1b0e327eb5d3013677b6e8124b75b6f996"},
-        {"loop": 2, "loop_local_id": "F1", "status": "resolved", "sha": "<pending>", "idempotency_key": "loop2-F-002-resolved"}
+        {"loop": 2, "loop_local_id": "F1", "status": "resolved", "sha": "be1ea8b", "idempotency_key": "loop2-F-002-resolved"}
       ]
     },
     {
