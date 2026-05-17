@@ -81,7 +81,7 @@
           "loop": 3,
           "loop_local_id": "F1",
           "status": "resolved",
-          "sha": "<pending>",
+          "sha": "1afe55ef7f2bd4f74df560fed36967c80b70a86b",
           "idempotency_key": "loop3-F-003-resolved"
         }
       ]
@@ -111,7 +111,7 @@
           "loop": 3,
           "loop_local_id": "F2",
           "status": "open",
-          "sha": "<pending>"
+          "sha": "1afe55ef7f2bd4f74df560fed36967c80b70a86b"
         }
       ]
     }
