@@ -1,5 +1,6 @@
 ---
 import { site } from '../content/site';
+import { url } from '../utils/url';
 
 const currentYear = new Date().getFullYear();
 ---
@@ -7,9 +8,9 @@ const currentYear = new Date().getFullYear();
 <footer class="site-footer">
   <div class="container footer-inner">
     <nav class="footer-links" aria-label="Footer navigation">
-      <a href={`${import.meta.env.BASE_URL}support`}>Support</a>
-      <a href={`${import.meta.env.BASE_URL}privacy`}>Privacy</a>
-      <a href={`${import.meta.env.BASE_URL}faq`}>FAQ</a>
+      <a href={url('/support')}>Support</a>
+      <a href={url('/privacy')}>Privacy</a>
+      <a href={url('/faq')}>FAQ</a>
     </nav>
     <p class="footer-copy">&copy; {currentYear} {site.name}. All rights reserved.</p>
   </div>

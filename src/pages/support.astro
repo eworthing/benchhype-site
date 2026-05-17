@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../content/site';
+import { url } from '../utils/url';
 ---
 
 <BaseLayout
@@ -68,9 +69,9 @@ import { site } from '../content/site';
 
     <h2>Links</h2>
     <ul>
-      <li><a href={`${import.meta.env.BASE_URL}`}>Home</a></li>
-      <li><a href={`${import.meta.env.BASE_URL}privacy`}>Privacy Policy</a></li>
-      <li><a href={`${import.meta.env.BASE_URL}faq`}>FAQ</a></li>
+      <li><a href={url('/')}>Home</a></li>
+      <li><a href={url('/privacy')}>Privacy Policy</a></li>
+      <li><a href={url('/faq')}>FAQ</a></li>
     </ul>
   </article>
 </BaseLayout>

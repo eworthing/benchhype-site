@@ -195,3 +195,102 @@ Changed `src/content/site.ts` (added `icon` string field to each of 3 `benefits[
 ## Loop 2 Implementation Review
 
 Verdict: **approved**. All three checks passed: parallel icons array fully removed from BenefitGrid.astro; site.ts benefits[] carry icon fields with TypeScript enforcement; no regression introduced.
+
+--- Loop 3 (UTC 2026-05-16T21:42:00Z) ---
+
+<!-- loop_cap: 5 -->
+
+see Loop 1 Discovery
+
+### Loop Counter
+Loop 3 of 5 (cap)
+
+### System Flag
+[STATE: HALT_STAGNATION] halt_subtype: no_backlog
+
+---
+
+## Contest Verdict
+
+**Good app, but not top-tier yet**
+
+Three loops resolved all Noticeable-weakness findings: Schema.org honesty leak (F-001, L1), parallel icons array drift (F-002, L2), and BASE_URL scatter across 7 files with two inconsistent patterns (F-003, L3). The architecture is now a clean flat DAG with a single content source (`site.ts`) and a single URL-construction helper (`url.ts`). The sole remaining structural note is the Hero.astro device mockup (220 hardcoded lines), Cosmetic for contest — its deletion test passes and it earns its keep as the above-fold visual. Test strategy is genuinely 3/10 because there is no runtime domain logic to test.
+
+## Scorecard (1-10)
+
+- **Architecture quality**: 9.5 | Delta: UP | Proof: L3 commit extracts `src/utils/url.ts` — deletion test passes (9 callers); no pass-through wrappers; flat DAG. Terminal normalization: Hero.astro device mockup is cosmetic accepted residual. residual_blocking_10: `Hero.astro:28-63 device mockup (220 lines)`. residual_disposition: accepted.
+- **State management**: 10 | Delta: SAME | Proof: `src/content/site.ts` — `as const` literal; zero mutable runtime state. 10-anchor met.
+- **Concurrency**: 10 | Delta: SAME | Proof: no async/await, no Promise, no event handlers. Astro SSG synchronous. 10-anchor met.
+- **Test strategy**: 3 | Delta: SAME | Proof: zero test files; `astro check` only. 9-anchor not met — no runtime domain logic to test. Named blocker: framework-constrained static site; SPT fails on "does it fix real ambiguity?"
+- **Credibility**: 9.5 | Delta: UP | Proof: L3 resolves URL double-slash hazard; all 9 call sites use `url(path)`. Terminal normalization: Hero tile drift cosmetic. residual_disposition: accepted.
+- **Domain modeling**: 9.5 | Delta: UP | Proof: L2 benefit icons in `site.ts`; terminal normalization: Hero tile labels cosmetic, not domain data; 9-anchor met. residual_disposition: accepted.
+- **Data flow**: 9.5 | Delta: UP | Proof: `import.meta.env.BASE_URL` owned by exactly one symbol (`url.ts:13`). DAG clean. residual_disposition: accepted.
+- **Framework idioms**: 9.5 | Delta: UP | Proof: L3 resolves L2-named blocker ("BASE_URL without shared url() helper"). All Astro idioms used correctly. residual_disposition: accepted.
+- **Code simplicity**: 9.5 | Delta: UP | Proof: 9 inline regex-strip/bare-concat expressions removed; 7 files simpler; deletion test passes. residual_disposition: accepted.
+
+## Authority Map
+
+| Concern | Owner | Writers | Readers | Persistence | Async mutations | Verdict |
+|---|---|---|---|---|---|---|
+| Page content | `src/content/site.ts` (`as const`) | None | All 8 components, 3 pages | None | None | Single and clear |
+| URL prefix | `src/utils/url.ts` (`url()`) | None | 7 callers across 6 files | None | None | Single and clear |
+
+## Strengths That Matter
+
+- All three Noticeable-weakness findings resolved across 3 loops — concrete structural improvements, no ceremony added.
+- Single URL convention: `url(path)` owns all BASE_URL construction; deletion test passes (9 callers).
+- Genuine content centralization: `site.ts` `as const`, all domain copy including benefit icons; TypeScript enforces field presence.
+
+## Findings
+
+### Finding F1: BASE_URL construction repeated at 9 call sites across 7 files with inconsistent patterns
+
+**Severity** — Noticeable weakness | **Architectural test failed** — Shallow module | **Dependency category** — `in-process`
+
+**Evidence** — `src/components/SiteHeader.astro:13,19,33` (pre-fix), `src/components/SiteFooter.astro:10-12` (pre-fix), `src/components/FAQList.astro:33` (pre-fix), `src/pages/support.astro:71-73` (pre-fix), `src/pages/404.astro:10` (pre-fix).
+
+**Minimal correction path** — Extracted `url(path: string): string` helper in `src/utils/url.ts`. All 9 call sites now use `url(path)`. This loop executed this fix.
+
+---
+
+### Finding F2: Hero device mockup is 220 lines of hardcoded simulation disconnected from site.ts
+
+**Severity** — Cosmetic for contest | **Architectural test failed** — Deletion test (passes — earns its keep as hero visual) | **Dependency category** — `in-process`
+
+**Evidence** — `src/components/Hero.astro:28-63`, `src/components/Hero.astro:67`.
+
+**Minimal correction path** — Replace with screenshot from `site.screenshots[0]` or source tile labels from `site.ts heroTiles`. Accepted residual; not required for contest standing.
+
+---
+
+## Simplification Check
+
+| Field | Value |
+|---|---|
+| structurally_necessary | F1 fix passes deletion test; removing url() forces complexity back to 9 callers |
+| new_seam_justified | false |
+| helpful_simplification | 7 callers read url('/support') instead of inline regex-strip or bare concat |
+| should_not_be_done | Protocol/Adapter for url(); test doubles for a pure function |
+| tests_after_fix | No tests exist; astro check (19 files) passes 0 errors |
+
+## Improvement Backlog
+
+*Empty.* All Noticeable-weakness findings resolved. F-004 cosmetic accepted residual. test_strategy:3 framework-constrained blocker.
+
+## Builder Notes
+
+1. BASE_URL as ambient concern → REVIEW_HISTORY.json `loops[2].builder_notes` for full notes
+2. Parallel arrays as invisible invariants → REVIEW_HISTORY.json `loops[2].builder_notes`
+3. Terminal normalization and honest scoring → REVIEW_HISTORY.json `loops[2].builder_notes`
+
+## Final Judge Narrative
+
+Three loops, three Noticeable-weakness findings resolved. Architecture now as clean as the codebase structure allows: flat DAG, single content source, single URL-construction helper, TypeScript enforcement at every domain boundary. Hero mockup drift is cosmetic — deletion test passes. Test strategy is honestly 3/10 because there is nothing to test: a static site transforming typed data into HTML has no behavioral domain logic. HALT_STAGNATION/no_backlog — the loop has done everything structurally improvable without adding ceremony.
+
+## Loop 3 Result
+
+Changed: created `src/utils/url.ts`; updated `src/components/SiteHeader.astro`, `src/components/SiteFooter.astro`, `src/components/FAQList.astro`, `src/pages/support.astro`, `src/pages/404.astro`, `src/layouts/BaseLayout.astro` (import + url() calls replacing all 9 BASE_URL call sites). `npm run build` (19 files): 0 errors, 0 warnings, 0 hints, 5 pages. Targeted finding F1 (stable_id F-003) is resolved — `grep -r "import.meta.env.BASE_URL" src/` returns only `url.ts:13`. No unintended scorecard regression.
+
+## Loop 3 Implementation Review
+
+Verdict: **approved**. All three checks passed: F-003 pattern no longer present (BASE_URL only in url.ts:13); url() is a pure in-process function (no new Seam, no costume layer); no regression introduced.

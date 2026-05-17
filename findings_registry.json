@@ -7,14 +7,23 @@
       "title": "Schema.org structured data claims free pricing for a paid app",
       "category_hint": "honesty-leak",
       "primary_file": "src/layouts/BaseLayout.astro",
-      "primary_evidence_lines": [60, 63],
+      "primary_evidence_lines": [
+        60,
+        63
+      ],
       "test_failed": "n/a",
       "severity": "Noticeable weakness",
       "first_seen_loop": 1,
       "first_seen_sha": "45006e1b0e327eb5d3013677b6e8124b75b6f996",
       "last_seen_loop": 1,
       "occurrences": [
-        {"loop": 1, "loop_local_id": "F1", "status": "resolved", "sha": "56056b679567bb027e49f77c0a80a14fe3fbbd1d", "idempotency_key": "loop1-F-001-resolved"}
+        {
+          "loop": 1,
+          "loop_local_id": "F1",
+          "status": "resolved",
+          "sha": "56056b679567bb027e49f77c0a80a14fe3fbbd1d",
+          "idempotency_key": "loop1-F-001-resolved"
+        }
       ]
     },
     {
@@ -22,15 +31,29 @@
       "title": "BenefitGrid parallel icons array silently mismatches on content growth",
       "category_hint": "parallel-array-drift",
       "primary_file": "src/components/BenefitGrid.astro",
-      "primary_evidence_lines": [4, 8],
+      "primary_evidence_lines": [
+        4,
+        8
+      ],
       "test_failed": "Shallow module",
       "severity": "Noticeable weakness",
       "first_seen_loop": 1,
       "first_seen_sha": "45006e1b0e327eb5d3013677b6e8124b75b6f996",
       "last_seen_loop": 2,
       "occurrences": [
-        {"loop": 1, "loop_local_id": "F2", "status": "open", "sha": "45006e1b0e327eb5d3013677b6e8124b75b6f996"},
-        {"loop": 2, "loop_local_id": "F1", "status": "resolved", "sha": "be1ea8b", "idempotency_key": "loop2-F-002-resolved"}
+        {
+          "loop": 1,
+          "loop_local_id": "F2",
+          "status": "open",
+          "sha": "45006e1b0e327eb5d3013677b6e8124b75b6f996"
+        },
+        {
+          "loop": 2,
+          "loop_local_id": "F1",
+          "status": "resolved",
+          "sha": "be1ea8b",
+          "idempotency_key": "loop2-F-002-resolved"
+        }
       ]
     },
     {
@@ -38,14 +61,29 @@
       "title": "BASE_URL construction repeated at 9 call sites across 7 files with inconsistent patterns",
       "category_hint": "base-url-scatter",
       "primary_file": "src/components/SiteHeader.astro",
-      "primary_evidence_lines": [13, 33],
+      "primary_evidence_lines": [
+        13,
+        33
+      ],
       "test_failed": "Shallow module",
       "severity": "Noticeable weakness",
       "first_seen_loop": 1,
       "first_seen_sha": "45006e1b0e327eb5d3013677b6e8124b75b6f996",
-      "last_seen_loop": 1,
+      "last_seen_loop": 3,
       "occurrences": [
-        {"loop": 1, "loop_local_id": "F3", "status": "open", "sha": "45006e1b0e327eb5d3013677b6e8124b75b6f996"}
+        {
+          "loop": 1,
+          "loop_local_id": "F3",
+          "status": "open",
+          "sha": "45006e1b0e327eb5d3013677b6e8124b75b6f996"
+        },
+        {
+          "loop": 3,
+          "loop_local_id": "F1",
+          "status": "resolved",
+          "sha": "<pending>",
+          "idempotency_key": "loop3-F-003-resolved"
+        }
       ]
     },
     {
@@ -53,14 +91,28 @@
       "title": "Hero device mockup is 220 lines of hardcoded simulation disconnected from site.ts",
       "category_hint": "hardcoded-simulation",
       "primary_file": "src/components/Hero.astro",
-      "primary_evidence_lines": [28, 63],
+      "primary_evidence_lines": [
+        28,
+        63
+      ],
       "test_failed": "Deletion test",
       "severity": "Cosmetic for contest",
       "first_seen_loop": 1,
       "first_seen_sha": "45006e1b0e327eb5d3013677b6e8124b75b6f996",
-      "last_seen_loop": 1,
+      "last_seen_loop": 3,
       "occurrences": [
-        {"loop": 1, "loop_local_id": "F4", "status": "open", "sha": "45006e1b0e327eb5d3013677b6e8124b75b6f996"}
+        {
+          "loop": 1,
+          "loop_local_id": "F4",
+          "status": "open",
+          "sha": "45006e1b0e327eb5d3013677b6e8124b75b6f996"
+        },
+        {
+          "loop": 3,
+          "loop_local_id": "F2",
+          "status": "open",
+          "sha": "<pending>"
+        }
       ]
     }
   ]
