@@ -50,18 +50,21 @@ const ogImageURL = new URL(ogImage, Astro.site);
     <!-- <link rel="apple-touch-icon" href="/app-icon-512.png" /> -->
 
     <!-- Structured Data -->
-    <script type="application/ld+json" set:html={JSON.stringify({
+    <script is:inline type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
       "name": site.name,
       "description": description,
-      "operatingSystem": "iOS 26+",
+      "operatingSystem": site.iosRequirement,
       "applicationCategory": "SportsApplication",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": site.pricing.free.title,
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      ]
     })} />
   </head>
   <body>

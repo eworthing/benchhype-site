@@ -1,0 +1,327 @@
+{
+  "schema_version": 3,
+  "loop": 1,
+  "loop_cap": 5,
+  "state": "CONTINUE",
+  "halt_subtype": null,
+  "halt_handoff": null,
+  "halt_handoff_text": null,
+  "dry_run": false,
+  "re_validated_at_sha": null,
+  "re_validation_context": null,
+  "provider": "claude_code",
+  "loop_model": "claude-sonnet-4-6",
+  "loop_model_source": "default",
+  "reviewer_model": "claude-sonnet-4-6",
+  "reviewer_model_source": "default",
+  "spawn_isolation": "subagent",
+  "findings_registry_path": "./findings_registry.json",
+  "discovery": {
+    "source_roots": ["src/components/", "src/pages/", "src/layouts/", "src/content/", "src/styles/"],
+    "test_command": null,
+    "build_command": "npm run build",
+    "lens": "Generic",
+    "adrs": [],
+    "domain_terms": ["site", "hero", "feature", "benefit", "workflow", "screenshot", "FAQ", "pricing", "board", "cue", "roster", "script"],
+    "test_scope": "full",
+    "test_filter": null,
+    "working_tree_dirty_paths": ["sequential-dazzling-book.md"]
+  },
+  "verdict": "Good app, but not top-tier yet",
+  "verdict_explanation": "For a static marketing site, the architecture is commendably flat: a single site.ts content module feeding all components, no costume layers, no redundant seams. The structural findings are real but local — a Schema.org honesty leak, a parallel icons array that silently mismaps on content growth, and BASE_URL construction scattered across 9 call sites in 7 files. None is catastrophic; all are fixable in targeted loops.",
+  "scorecard": {
+    "architecture_quality": {
+      "score": 7.5,
+      "delta": "SAME",
+      "proof": "src/content/site.ts flat DAG with `as const`; components as pure template leaves. Residual: parallel icons array at BenefitGrid.astro:4-8; BASE_URL pattern repeated across 7 files.",
+      "residual_blocking_10": null,
+      "residual_disposition": null,
+      "residual_rationale_or_backlog_ref": null,
+      "unverifiable_due_to_build_failure": false
+    },
+    "state_management": {
+      "score": 10,
+      "delta": "SAME",
+      "proof": "src/content/site.ts:206 — `as const` literal; zero mutable runtime state; static site generator pipeline; no writers, no readers, no persistence seam.",
+      "residual_blocking_10": null,
+      "residual_disposition": null,
+      "residual_rationale_or_backlog_ref": null,
+      "unverifiable_due_to_build_failure": false
+    },
+    "domain_modeling": {
+      "score": 7.0,
+      "delta": "SAME",
+      "proof": "site.ts as const centralizes all content. Residual: icons (visual concern) co-located in BenefitGrid.astro as parallel array rather than in site.ts alongside the benefit data they annotate.",
+      "residual_blocking_10": null,
+      "residual_disposition": null,
+      "residual_rationale_or_backlog_ref": null,
+      "unverifiable_due_to_build_failure": false
+    },
+    "data_flow": {
+      "score": 8.5,
+      "delta": "SAME",
+      "proof": "import { site } from '../content/site' is the single data source; all 8 components and 3 pages import from it. DAG is clean — no back-channels. Residual: BASE_URL transformation repeated at 9 call sites across 7 files with two inconsistent patterns.",
+      "residual_blocking_10": null,
+      "residual_disposition": null,
+      "residual_rationale_or_backlog_ref": null,
+      "unverifiable_due_to_build_failure": false
+    },
+    "framework_idioms": {
+      "score": 8.5,
+      "delta": "SAME",
+      "proof": "Astro idioms used correctly — slot layout composition, Astro.props interface typing, loading=lazy/decoding=async on images. Residual: BaseLayout.astro:53 generates astro(4000) hint; Schema.org offers block references no Astro site data.",
+      "residual_blocking_10": null,
+      "residual_disposition": null,
+      "residual_rationale_or_backlog_ref": null,
+      "unverifiable_due_to_build_failure": false
+    },
+    "concurrency": {
+      "score": 10,
+      "delta": "SAME",
+      "proof": "No async/await, no Promise, no event handlers, no Task constructs in any source file. Astro SSG builds synchronous template trees at build time. Concurrency is genuinely N/A for a static site generator.",
+      "residual_blocking_10": null,
+      "residual_disposition": null,
+      "residual_rationale_or_backlog_ref": null,
+      "unverifiable_due_to_build_failure": false
+    },
+    "simplicity": {
+      "score": 7.5,
+      "delta": "SAME",
+      "proof": "Hero.astro:22-77 contains 55-line hardcoded HTML device mockup with 12 fixed tile labels disconnected from site.ts, plus ~165 CSS lines. BenefitGrid.astro:4-8 parallel icons array adds implicit invariant.",
+      "residual_blocking_10": null,
+      "residual_disposition": null,
+      "residual_rationale_or_backlog_ref": null,
+      "unverifiable_due_to_build_failure": false
+    },
+    "test_strategy": {
+      "score": 3,
+      "delta": "SAME",
+      "proof": "Zero test files in repo. astro check provides type correctness only. No behavioral, semantic, or integration tests. 9-anchor (tests targeting real Interfaces) is not met.",
+      "residual_blocking_10": null,
+      "residual_disposition": null,
+      "residual_rationale_or_backlog_ref": null,
+      "unverifiable_due_to_build_failure": false
+    },
+    "credibility": {
+      "score": 7.5,
+      "delta": "SAME",
+      "proof": "Schema.org structured data at src/layouts/BaseLayout.astro:60-63 claims price: '0' for a paid one-time-purchase app (site.pricing.pro.price = 'One-time purchase' at site.ts:167). Visible honesty leak.",
+      "residual_blocking_10": null,
+      "residual_disposition": null,
+      "residual_rationale_or_backlog_ref": null,
+      "unverifiable_due_to_build_failure": false
+    }
+  },
+  "authority_map": [
+    {
+      "concern": "Page content",
+      "owner": "src/content/site.ts (build-time as const)",
+      "allowed_writers": [],
+      "readers": ["All 8 components", "3 pages"],
+      "persistence_seam": null,
+      "async_mutation_entry_points": [],
+      "verdict": "Single and clear"
+    },
+    {
+      "concern": "URL prefix construction",
+      "owner": "import.meta.env.BASE_URL (Astro env, build-time)",
+      "allowed_writers": [],
+      "readers": ["SiteHeader.astro:13,19,33", "SiteFooter.astro:10-12", "FAQList.astro:33", "support.astro:71-73", "404.astro:10", "BaseLayout.astro:48"],
+      "persistence_seam": null,
+      "async_mutation_entry_points": [],
+      "verdict": "Single and clear"
+    }
+  ],
+  "strengths": [
+    "site.ts as const centralizes all domain copy with zero framework imports — genuine content centralization, not fake-clean reward",
+    "FAQList.astro typed interface Props with limit/showCta parameters — callers in control, no ambient state",
+    "BaseLayout.astro Astro slot composition — header/footer composed without duplication; deletion test passes"
+  ],
+  "findings": [
+    {
+      "loop_local_id": "F1",
+      "stable_id": "F-001",
+      "id": "F1",
+      "title": "Schema.org structured data claims free pricing for a paid app",
+      "why_it_matters": "Search crawlers ingest JSON-LD and may surface misleading rich results showing price: $0 for a paid one-time-purchase app.",
+      "what_is_wrong": "BaseLayout.astro:60-63 hardcodes 'price': '0', 'priceCurrency': 'USD' in the Schema.org SoftwareApplication offer. site.pricing.pro.price = 'One-time purchase' (site.ts:167) and the free tier has no numeric price field. The schema falsely claims all versions are free.",
+      "evidence": ["src/layouts/BaseLayout.astro:60-63", "src/content/site.ts:167"],
+      "test_failed": "n/a",
+      "dependency_category": null,
+      "leverage_impact": "None: the offer object is a 3-line inline literal; no leverage gained or lost.",
+      "locality_impact": "Low: offer defined in one place (BaseLayout.astro:60-63) but doesn't reference site.pricing — the honest source of truth is two files away.",
+      "metric_signal": "Astro build hint astro(4000) on BaseLayout.astro:53 — the same script tag containing the bad data.",
+      "why_weakens_submission": "A judge reading source sees PricingCard.astro correctly renders 'One-time purchase' while JSON-LD in the layout claims price: 0. The discrepancy is a honesty leak a production code reviewer would flag immediately.",
+      "severity": "Noticeable weakness",
+      "adr_conflicts": [],
+      "adr_reopen_justification": null,
+      "minimal_correction_path": "Remove the offers block entirely from the Schema.org JSON-LD (Schema.org does not require it for SoftwareApplication), or emit a factually correct entry only for the free tier (price: '0' is truthful for the free plan). Also add is:inline directive to the script tag to silence the astro(4000) hint.",
+      "blast_radius": {
+        "change": ["src/layouts/BaseLayout.astro"],
+        "avoid": ["src/content/site.ts", "src/components/PricingCard.astro"]
+      }
+    },
+    {
+      "loop_local_id": "F2",
+      "stable_id": "F-002",
+      "id": "F2",
+      "title": "BenefitGrid parallel icons array silently mismatches on content growth",
+      "why_it_matters": "Adding a fourth benefit to site.ts produces a silently-broken card with no icon, undetectable until visual QA.",
+      "what_is_wrong": "BenefitGrid.astro:4-8 defines const icons = [svg1, svg2, svg3] (3 entries). At line 15, site.benefits.map((benefit, i) => ... icons[i]) indexes into this array. site.benefits has 3 entries (site.ts:26-39). If a fourth benefit is added, icons[3] is undefined and Fragment set:html renders empty — no TypeScript error, no build warning.",
+      "evidence": ["src/components/BenefitGrid.astro:4-8", "src/components/BenefitGrid.astro:15-18", "src/content/site.ts:26-39"],
+      "test_failed": "Shallow module",
+      "dependency_category": "in-process",
+      "leverage_impact": "Callers (editors of site.ts) cannot know that adding a benefit without also updating BenefitGrid.astro breaks the UI.",
+      "locality_impact": "Change spreads: a domain content change (site.ts) requires a parallel implementation change (BenefitGrid.astro) with no mechanical enforcement.",
+      "metric_signal": "none",
+      "why_weakens_submission": "Silently broken UI on any content growth. The parallel array is a maintenance hazard that a code reviewer would flag as an invariant violation.",
+      "severity": "Noticeable weakness",
+      "adr_conflicts": [],
+      "adr_reopen_justification": null,
+      "minimal_correction_path": "Move SVG icon strings into each benefit entry in site.ts as an `icon` field. Template reads benefit.icon directly. TypeScript enforces field presence — missing icon = type error at build time.",
+      "blast_radius": {
+        "change": ["src/content/site.ts", "src/components/BenefitGrid.astro"],
+        "avoid": ["src/styles/global.css", "src/pages/"]
+      }
+    },
+    {
+      "loop_local_id": "F3",
+      "stable_id": "F-003",
+      "id": "F3",
+      "title": "BASE_URL construction repeated at 9 call sites across 7 files with inconsistent patterns",
+      "why_it_matters": "Any URL convention change requires touching 7 files with two inconsistent patterns that can produce broken links on GitHub Pages.",
+      "what_is_wrong": "Two construction patterns: (1) ${BASE_URL}${link.href.replace(/^\\//, '')} in SiteHeader.astro:19,33; (2) bare ${BASE_URL}support concatenation in SiteFooter.astro:10-12, FAQList.astro:33, support.astro:71-73. Pattern 2 works only because literals happen not to have leading slashes. Changing SiteFooter's href to '/support' would produce double-slash on GitHub Pages.",
+      "evidence": ["src/components/SiteHeader.astro:13,19,33", "src/components/SiteFooter.astro:10-12", "src/components/FAQList.astro:33", "src/pages/support.astro:71-73", "src/pages/404.astro:10"],
+      "test_failed": "Shallow module",
+      "dependency_category": "in-process",
+      "leverage_impact": "Each call site must independently know the BASE_URL transformation rule including the slash-stripping quirk.",
+      "locality_impact": "URL convention change requires touching 7 files; inconsistency means some sites are more fragile than others.",
+      "metric_signal": "none",
+      "why_weakens_submission": "Inconsistent URL construction is the kind of thing that ships a broken link to production. On GitHub Pages, BASE_URL is /benchhype-site/ so BASE_URL/support produces /benchhype-site//support.",
+      "severity": "Noticeable weakness",
+      "adr_conflicts": [],
+      "adr_reopen_justification": null,
+      "minimal_correction_path": "Extract a url(path: string): string helper in src/utils/url.ts: export const url = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\\//, '')}`. All 9 call sites become url('support'), url('/'), etc. Deletion test passes: removing helper forces complexity back to 9 callers.",
+      "blast_radius": {
+        "change": ["src/utils/url.ts (new)", "src/components/SiteHeader.astro", "src/components/SiteFooter.astro", "src/components/FAQList.astro", "src/pages/support.astro", "src/pages/404.astro", "src/layouts/BaseLayout.astro"],
+        "avoid": ["src/content/site.ts", "src/styles/global.css", "public/"]
+      }
+    },
+    {
+      "loop_local_id": "F4",
+      "stable_id": "F-004",
+      "id": "F4",
+      "title": "Hero device mockup is 220 lines of hardcoded simulation disconnected from site.ts",
+      "why_it_matters": "Tile labels and player title in the hero visual will drift from the real app's content with zero build-time warning.",
+      "what_is_wrong": "Hero.astro:28-63 contains 12 hardcoded .sb-tile labels (Airhorn, Anthem, Crowd, Whistle, Buzzer, Organ, Defense, Strike, Charge, Timeout, Slap, Win) and player title 'Game Opener Mix' (Hero.astro:67), all disconnected from site.ts. ~165 lines CSS for the mockup.",
+      "evidence": ["src/components/Hero.astro:28-63", "src/components/Hero.astro:67", "src/components/Hero.astro:80-286"],
+      "test_failed": "Deletion test",
+      "dependency_category": "in-process",
+      "leverage_impact": "None: the mockup is pure HTML/CSS with no reuse.",
+      "locality_impact": "Changes to app tile naming require manual hunting in Hero.astro, not site.ts.",
+      "metric_signal": "none",
+      "why_weakens_submission": "Maintenance drift between hero visual and real app is invisible. Visitors read tile labels in the hero that may not match the actual app.",
+      "severity": "Cosmetic for contest",
+      "adr_conflicts": [],
+      "adr_reopen_justification": null,
+      "minimal_correction_path": "Replace the hardcoded device mockup with a real screenshot from site.screenshots[0] framed in the existing .device-frame CSS, or source tile labels from a site.ts heroTiles array. Option (a) is simpler — removes ~50 HTML lines and ~120 CSS lines.",
+      "blast_radius": {
+        "change": ["src/components/Hero.astro"],
+        "avoid": ["src/content/site.ts", "src/styles/global.css"]
+      }
+    }
+  ],
+  "simplification_check": {
+    "structurally_necessary": "F1 fix removes a factual inaccuracy from Schema.org structured data — passes deletion test (offers block can be omitted without breaking anything).",
+    "new_seam_justified": false,
+    "new_seam_adapters": [],
+    "helpful_simplification": "Removing or correcting the offers block in BaseLayout is purely subtractive — fewer lines, more honest.",
+    "should_not_be_done": "Adding a complex pricing-aware Schema.org renderer; introducing content module dependency on pricing just for JSON-LD.",
+    "tests_after_fix": "No tests exist; no test changes. astro check is the verification gate — it will still pass with 0 errors."
+  },
+  "backlog": [
+    {
+      "priority": 1,
+      "title": "Correct Schema.org structured data — remove or fix the offers price block",
+      "kind": "structural",
+      "rank": "needed for winning",
+      "why_it_matters": "Honesty leak: search crawlers see free pricing for a paid one-time-purchase app. Also silences the astro(4000) hint by adding is:inline to the script tag.",
+      "score_impact": "Overall implementation credibility +0.5, Framework/platform best practices +0.5"
+    },
+    {
+      "priority": 2,
+      "title": "Inline icons into site.ts benefit entries, remove BenefitGrid parallel array",
+      "kind": "structural",
+      "rank": "helpful",
+      "why_it_matters": "Silent UI breakage on content growth; invariant not enforced by type system.",
+      "score_impact": "Domain modeling +0.5, Architecture quality +0.5"
+    },
+    {
+      "priority": 3,
+      "title": "Extract url() helper to consolidate BASE_URL construction across 7 files",
+      "kind": "structural",
+      "rank": "helpful",
+      "why_it_matters": "7-file touch radius for URL convention change; two inconsistent patterns that can produce broken links.",
+      "score_impact": "Data flow +0.5, Code simplicity +0.5"
+    }
+  ],
+  "unresolved_reason": null,
+  "deepening_candidates": [
+    {
+      "candidate_module": "BenefitGrid icons parallel array",
+      "source_friction_proven": "Finding F2 — icons array indexed against benefits with no enforcement",
+      "why_shallow_or_misplaced": "Icon-to-benefit mapping is implicit runtime association; interface (edit site.ts) does not expose the constraint (also update BenefitGrid.astro).",
+      "behavior_to_move_behind_interface": "Move icon SVGs into site.ts benefits[].icon field; template reads benefit.icon directly — no index.",
+      "dependency_category": "in-process",
+      "test_surface_after_change": "No tests. Build-time TypeScript enforces field presence.",
+      "smallest_first_step": "Add icon: string field to each benefit in site.ts; update BenefitGrid.astro to use benefit.icon.",
+      "what_not_to_do": "Do not extract an icon component or introduce a mapping object. Keep as string field in the data."
+    }
+  ],
+  "builder_notes": [
+    {
+      "pattern": "Parallel arrays as invisible invariants",
+      "how_to_recognize": "Any map(..., i) => sideArray[i] pattern where two arrays are maintained separately.",
+      "smallest_coding_rule": "Co-locate associated data in the same object. If an icon belongs to a benefit, it is a property of the benefit, not an entry in a parallel array.",
+      "stack_example": "In site.ts: benefits: [{ title: '...', body: '...', icon: '<svg>...</svg>' }] — icon travels with the benefit."
+    },
+    {
+      "pattern": "BASE_URL as ambient concern",
+      "how_to_recognize": "Same env var read + string transform repeated in 7+ files across the codebase.",
+      "smallest_coding_rule": "One function url(path) that owns the convention. All callers use it. Deletion test: if you delete the function, the problem comes back in all callers — it earns its keep.",
+      "stack_example": "src/utils/url.ts: export const url = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\\//, '')}`"
+    },
+    {
+      "pattern": "Schema.org as honesty surface",
+      "how_to_recognize": "JSON-LD in a layout that contains prices, dates, or feature flags that also appear in a separate content module.",
+      "smallest_coding_rule": "Either derive JSON-LD values from the content module (DRY), or omit claims the code cannot authoritatively make. Free tier can claim price=0 honestly; pro tier cannot claim a price until one is finalized.",
+      "stack_example": "BaseLayout.astro: derive offer price from site.pricing.free (truthfully free) and omit the pro offer until a numeric price exists."
+    }
+  ],
+  "narrative": "Place — good, not winning. The architecture is honestly flat: site.ts as the single content source feeding pure template leaves is the right pattern for a static site, and it's executed cleanly. The structural weaknesses are concentrated: a Schema.org honesty leak misrepresents pricing to search crawlers, a parallel icons array will silently break on content growth, and BASE_URL construction is scattered across 7 files with two inconsistent patterns. These are all fixable in 2-3 loops. Test strategy is effectively zero — for a pure static site this is less damning than for an app, but there are no behavioral checks of any kind. Concurrency and state management are genuinely N/A and scored 10 honestly. Future risk: the hero device mockup (220 hardcoded lines disconnected from site.ts) will drift from the real app's UI as the app ships.",
+  "loop_result": {
+    "what_changed": "Fixed src/layouts/BaseLayout.astro: added is:inline directive to JSON-LD script tag; restructured offers block to truthfully represent only the free tier (site.pricing.free.title, price: '0'); replaced hardcoded operatingSystem string with site.iosRequirement.",
+    "evidence_change_is_honest": "npm run build: 0 errors, 0 warnings, 0 hints (was 1 hint astro(4000) pre-fix). 5 pages built. astro check clean.",
+    "targeted_finding_status": "resolved",
+    "unintended_regression": null,
+    "changed_paths": ["src/layouts/BaseLayout.astro"],
+    "interface_test_coverage_path": null
+  },
+  "implementation_review": {
+    "verdict": "approved",
+    "reason": "All three checks passed; F1 (Schema.org free-price claim on all tiers) is no longer present in source; offers array correctly scoped to free tier only; astro(4000) hint eliminated; no regression introduced.",
+    "checks": {
+      "reality": "passed",
+      "honesty": "passed",
+      "regression": "passed"
+    },
+    "regressions": [],
+    "conditions": [],
+    "rounds": 1,
+    "retry_count": 1,
+    "retry_cause": null,
+    "retry_attempts": [
+      {"attempt": 1, "outcome": "ok", "error": null, "duration_ms": null}
+    ]
+  }
+}
