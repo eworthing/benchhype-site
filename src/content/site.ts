@@ -157,6 +157,26 @@ export const site = {
     },
   ],
 
+  heroTiles: [
+    { label: "Airhorn", state: "active" },
+    { label: "Anthem", state: "default" },
+    { label: "Crowd", state: "default" },
+    { label: "Whistle", state: "default" },
+    { label: "Buzzer", state: "playing" },
+    { label: "Organ", state: "default" },
+    { label: "Defense", state: "default" },
+    { label: "Strike", state: "default" },
+    { label: "Charge", state: "default" },
+    { label: "Timeout", state: "default" },
+    { label: "Slap", state: "default" },
+    { label: "Win", state: "default" },
+  ],
+
+  heroPlayer: {
+    title: "Game Opener Mix",
+    progress: 33
+  },
+
   pricing: {
     free: {
       title: "Free",
