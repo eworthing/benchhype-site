@@ -14,7 +14,7 @@
       "first_seen_sha": "45006e1b0e327eb5d3013677b6e8124b75b6f996",
       "last_seen_loop": 1,
       "occurrences": [
-        {"loop": 1, "loop_local_id": "F1", "status": "resolved", "sha": null, "idempotency_key": "loop1-F-001-resolved"}
+        {"loop": 1, "loop_local_id": "F1", "status": "resolved", "sha": "56056b679567bb027e49f77c0a80a14fe3fbbd1d", "idempotency_key": "loop1-F-001-resolved"}
       ]
     },
     {
