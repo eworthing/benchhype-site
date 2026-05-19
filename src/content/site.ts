@@ -7,7 +7,7 @@ export const site = {
     "Built for PA operators, game-day volunteers, and anyone running sound at live sports events.",
   iosRequirement: "iOS 26+",
 
-  badges: ["iPhone & iPad", "Works offline", "Spotify integration", "Built for game day"],
+  badges: ["iPhone & iPad", "Works offline", "Apple Music integration", "Built for game day"],
 
   ctaPrimary: {
     label: "Coming Soon",
@@ -42,7 +42,7 @@ export const site = {
   ],
 
   workflow: [
-    { step: "Import sounds", detail: "Add local audio files or Spotify tracks to your library" },
+    { step: "Import sounds", detail: "Add local audio files or Apple Music tracks to your library" },
     { step: "Build a board", detail: "Arrange tap-ready buttons for your game-day workflow" },
     { step: "Run preflight", detail: "Verify audio files, speaker connections, and storage before the game" },
     { step: "Start the show", detail: "Enter live mode with focused performance controls" },
@@ -53,12 +53,12 @@ export const site = {
   features: [
     {
       title: "Sound Library",
-      summary: "Import local audio or add Spotify tracks and playlists.",
+      summary: "Import local audio or add Apple Music tracks and playlists.",
       image: "/features/feature-library.webp",
       bullets: [
-        "Supports M4A, MP3, WAV, AIFF, CAF, and M4R",
-        "Color tags, groups, search, and duplicate detection",
-        "Optional hotkeys for external keyboards",
+        "Supports standard audio formats (MP3, M4A, WAV, and more)",
+        "Organize with custom color tags, sound groups, and fast search",
+        "Smart duplicate detection to keep your library clean and save storage",
       ],
     },
     {
@@ -66,9 +66,9 @@ export const site = {
       summary: "Fine-tune how each sound plays with precision controls.",
       image: "/features/feature-cue-editor.webp",
       bullets: [
-        "Waveform trimming with exact start and end points",
-        "Fade in/out with adjustable durations",
-        "Cue points, dropout regions, and per-sound volume (0–150%)",
+        "Visual trim editor to set precise start and end times for any sound",
+        "Smooth fade-ins and fade-outs with adjustable durations",
+        "Custom start points and volume boosts up to 150% for quiet tracks",
       ],
     },
     {
@@ -76,10 +76,10 @@ export const site = {
       summary: "Build tap-ready layouts for fast game-day playback.",
       image: "/features/feature-boards.webp",
       bullets: [
-        "Flexible button grids with adjustable density (2–5 columns) and wide bar layout",
-        "Live status indicators and focused performance screen",
-        "Configurable tap gestures, swipe volume, and panic mute",
-        "Pre-built templates for hockey and general events",
+        "Customizable button sizes (2 to 5 columns) to fit any iPhone or iPad screen",
+        "Live progress rings and large buttons built for cold ice rinks or fields",
+        "Remap buttons to tap, double-tap, or swipe to easily adjust volume on the fly",
+        "Multi-button split — play different parts of the same song on separate buttons",
       ],
     },
     {
@@ -87,29 +87,29 @@ export const site = {
       summary: "Always-visible controls to stay in command during the show.",
       image: "/features/feature-emergency.webp",
       bullets: [
-        "Panic mute — instant silence with one tap",
-        "Now playing strip with elapsed time and gain control",
-        "Master volume slider and fade-out always within reach",
+        "Panic mute — instantly silence all music with a single tap when a whistle blows",
+        "Now Playing bar showing time elapsed and current track volume",
+        "Always-visible master volume slider and quick fade-out button",
       ],
     },
     {
       title: "Scripts & Rosters",
-      summary: "Run repeatable show sequences and player intros.",
+      summary: "Design repeatable show sequences and manage player walkout rosters.",
       image: "/features/feature-scripts.webp",
       bullets: [
-        "Step-by-step scripts with timed waits, operator holds, fade-outs, and stop-all",
-        "Rehearsal mode, lock mode, and built-in templates",
-        "Roster walkouts with multiple entrance songs and pronunciation notes",
+        "Plan your pre-game show with timed pauses and tap-to-continue prompts",
+        "Lineup builder with quick drag-to-reorder and one-tap player benching",
+        "Assign multiple walk-up songs per player with spelling and pronunciation guides",
       ],
     },
     {
-      title: "Spotify Integration",
+      title: "Apple Music Integration",
       summary: "Add walk-up and background music alongside local sound cues.",
-      image: "/features/feature-spotify.webp",
+      image: "/features/feature-applemusic.webp",
       bullets: [
-        "Search and import tracks or playlists",
-        "Remote playback control",
-        "Requires Spotify Premium",
+        "Search and import millions of songs or playlists from Apple Music",
+        "Play and control streaming music directly alongside your local files",
+        "Requires an active Apple Music subscription and internet connection",
       ],
     },
     {
@@ -117,9 +117,9 @@ export const site = {
       summary: "Keep setups portable and usable under real conditions.",
       image: "/features/feature-backup.webp",
       bullets: [
-        "Backup and restore your entire setup with automatic backups",
-        "Session logs with timestamped play history and diagnostics",
-        "VoiceOver support and large touch targets",
+        "Automatic backups to ensure you never lose your boards or music lists",
+        "Game-day play history logs to see exactly what songs were played and when",
+        "Built-in accessibility with full voice support and oversized touch targets",
       ],
     },
   ],
@@ -195,11 +195,11 @@ export const site = {
   faq: [
     {
       q: "Does BenchHype work offline?",
-      a: "Yes. Local audio playback is designed to work without internet. Spotify features require an active Spotify Premium account and applicable connectivity.",
+      a: "Yes. Local audio playback is designed to work without internet. Apple Music features require an active Apple Music subscription and applicable connectivity.",
     },
     {
-      q: "Do I need Spotify Premium?",
-      a: "Only for Spotify features. BenchHype works great with local audio files only — no Spotify account required.",
+      q: "Do I need an Apple Music subscription?",
+      a: "Only for Apple Music features. BenchHype works great with local audio files only — no Apple Music subscription required.",
     },
     {
       q: "Is BenchHype only for hockey?",
@@ -215,11 +215,11 @@ export const site = {
     },
     {
       q: "Can I use only local files?",
-      a: "Absolutely. BenchHype supports M4A, MP3, WAV, AIFF, CAF, and M4R. Spotify integration is entirely optional.",
+      a: "Absolutely. BenchHype supports M4A, MP3, WAV, AIFF, CAF, and M4R. Apple Music integration is entirely optional.",
     },
     {
       q: "Can I customize how sounds are triggered?",
-      a: "Yes. You can remap single, double, and triple tap actions for both idle and playing tiles. You can also assign keyboard hotkeys for use with an external keyboard.",
+      a: "Yes. You can remap single, double, and triple tap actions for both idle and playing tiles, and configure custom gestures like swipe-to-gain or panic mute directly in Settings.",
     },
     {
       q: "What is Simple Mode?",
