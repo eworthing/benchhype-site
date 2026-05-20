@@ -23,8 +23,6 @@ jobs:
 
       - name: Build Astro site
         uses: withastro/action@v6
-        with:
-          node-version: 22
 
   deploy:
     needs: build
