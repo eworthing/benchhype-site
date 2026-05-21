@@ -19,8 +19,7 @@ export const site = {
     href: "#features",
   },
 
-  // TODO: Replace with real contact info
-  supportEmail: "TODO@example.com",
+  supportEmail: "info@benchhype.com",
   supportUrl: "/support",
   privacyUrl: "/privacy",
   benefits: [
