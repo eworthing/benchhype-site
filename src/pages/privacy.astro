@@ -9,80 +9,101 @@ import { site } from '../content/site';
 >
   <article class="section container prose">
     <h1>Privacy Policy</h1>
-    <p class="last-updated">Last updated: March 2026</p>
+    <p class="last-updated">Last updated: June 9, 2026</p>
 
     <h2>Overview</h2>
     <p>
-      {site.name} is a live sports audio control app for iPhone and iPad. We are committed
-      to protecting your privacy. This policy explains what information {site.name} collects,
-      how it is used, and your choices.
+      {site.name} is a live sports audio control app for iPhone and iPad. It is built to be
+      private by design: {site.name} does not require an account and collects no personal
+      data. This policy explains what stays on your device, how the optional features work,
+      and the choices you have.
     </p>
 
-    <h2>Information You Provide</h2>
+    <h2>Information We Collect</h2>
     <p>
-      {site.name} does not require you to create an account. The app does not collect your name,
-      email address, or other personal information unless you contact us directly for support.
+      {site.name} collects no personal information and transmits none to any server. Everything
+      you create in the app — team rosters, player names and jersey numbers, sound cues, boards,
+      scripts, setlists, and app settings — is stored only on your device. {site.name} has no
+      accounts, no sign-in, and no backend.
     </p>
 
     <h2>Local Audio Files and Imported Content</h2>
     <p>
-      Audio files you import into {site.name} remain on your device. {site.name} does not
-      upload, transmit, or share your local audio files with any server or third party.
+      Audio files you import and clips you record remain in {site.name}'s on-device storage.
+      {site.name} does not upload, transmit, or share your audio with any server or third party.
+    </p>
+
+    <h2>Microphone</h2>
+    <p>
+      If you choose to record audio clips, {site.name} uses the microphone solely to create
+      those recordings. Recordings are saved locally on your device and are never transmitted.
+      You can grant or revoke microphone access at any time in iOS Settings.
     </p>
 
     <h2>Apple Music Integration</h2>
     <p>
-      If you choose to authorize Apple Music, {site.name} uses Apple's MusicKit framework to enable
-      catalog search and playback features. Your Apple Music account status is managed by iOS and is subject
-      to <a href="https://www.apple.com/legal/privacy/data/en/apple-music/" rel="noopener noreferrer" target="_blank">Apple's Privacy Policy</a>.
-      {site.name} does not collect, store, or transmit your Apple Music credentials or listening history.
+      Apple Music is optional. If you authorize it, {site.name} uses Apple's MusicKit framework
+      to let you search the catalog and your library and assign tracks to sound cues. This is
+      read-only access provided through Apple; {site.name} does not collect, store, or transmit
+      your Apple Music credentials, listening history, or playback activity. Your Apple Music
+      account is managed by iOS and is subject to
+      <a href="https://www.apple.com/legal/privacy/data/en/apple-music/" rel="noopener noreferrer" target="_blank">Apple's Privacy Policy</a>.
     </p>
 
-    <!-- TODO: Finalize this section based on actual analytics/crash reporting implementation -->
-    <h2>Diagnostics and Crash Reporting</h2>
+    <h2>Backup and Export</h2>
     <p>
-      <!-- TODO: Update with specific details about crash reporting services used, if any -->
-      {site.name} may collect anonymous crash reports and basic diagnostics to help improve
-      app stability. This data does not include personally identifiable information.
+      {site.name} can save your setup to a backup file stored on your device. You may then export
+      that file to a location you choose — for example, the Files app or iCloud Drive. {site.name}
+      does not automatically upload or sync your data to any cloud service or server; exporting and
+      where the file goes are entirely under your control.
     </p>
 
-    <h2>Backup and Export Data</h2>
+    <h2>In-App Purchases</h2>
     <p>
-      {site.name} offers backup and restore features that store data locally on your device
-      or in your personal iCloud account. Backup data is not transmitted to our servers.
+      {site.name} Pro is purchased through the Apple App Store using StoreKit. Apple processes the
+      transaction; {site.name} never receives or stores your payment information. Purchases are
+      governed by
+      <a href="https://www.apple.com/legal/privacy/en-ww/" rel="noopener noreferrer" target="_blank">Apple's Privacy Policy</a>.
+    </p>
+
+    <h2>Analytics, Diagnostics, and Tracking</h2>
+    <p>
+      {site.name} contains no third-party analytics, crash reporting, advertising, or tracking
+      software. It does not collect usage data and does not track you across other apps or
+      websites.
     </p>
 
     <h2>Third-Party Services</h2>
     <p>
-      {site.name} may integrate with the following third-party services:
+      {site.name} relies on only the following Apple services, each governed by its own privacy
+      policy:
     </p>
     <ul>
-      <li>Apple Music (optional, for music playback)</li>
-      <li>Apple (App Store, iCloud backup)</li>
-      <!-- TODO: Add any additional third-party services -->
+      <li>Apple Music — optional, for assigning and playing catalog tracks as cues</li>
+      <li>Apple App Store / StoreKit — for the optional Pro purchase</li>
     </ul>
-    <p>
-      Each third-party service has its own privacy policy governing how your data is handled.
-    </p>
 
-    <h2>Data Retention</h2>
+    <h2>Data Retention and Your Choices</h2>
     <p>
-      Since {site.name} stores data locally on your device, data retention is under your control.
-      Deleting the app removes all locally stored data.
+      Because all data is stored locally, retention is under your control. You can:
     </p>
-
-    <h2>Your Choices</h2>
     <ul>
-      <li>You can use {site.name} without connecting Apple Music or any external service.</li>
-      <li>You can delete your local data at any time by removing the app.</li>
-      <li>You can manage iCloud backup through your device settings.</li>
+      <li>Use {site.name} fully without connecting Apple Music or any external service.</li>
+      <li>Delete all data by removing the app from your device.</li>
+      <li>Grant or revoke Apple Music and microphone permissions in iOS Settings.</li>
     </ul>
+
+    <h2>Children's Privacy</h2>
+    <p>
+      {site.name} is intended for game-day operators and is not directed to children under 13.
+      Because {site.name} collects no personal information from anyone, it knowingly collects no
+      personal information from children.
+    </p>
 
     <h2>Contact</h2>
     <p>
-      <!-- TODO: Replace with real support email -->
       If you have questions about this privacy policy, contact us at
-      <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>.
+      <a href={`mailto:${site.privacyEmail}`}>{site.privacyEmail}</a>.
     </p>
 
     <h2>Changes to This Policy</h2>

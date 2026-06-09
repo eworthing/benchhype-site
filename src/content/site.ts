@@ -20,6 +20,7 @@ export const site = {
   },
 
   supportEmail: "info@benchhype.com",
+  privacyEmail: "privacy@benchhype.com",
   supportUrl: "/support",
   privacyUrl: "/privacy",
   benefits: [
